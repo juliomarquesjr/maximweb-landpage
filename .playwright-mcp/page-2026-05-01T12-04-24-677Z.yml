@@ -1,0 +1,249 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - link "MaximWeb" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e6]
+        - generic [ref=e8]: MaximWeb
+      - button "Toggle menu" [ref=e10]:
+        - img [ref=e11]
+  - main [ref=e12]:
+    - generic [ref=e14]:
+      - generic [ref=e16]:
+        - img [ref=e17]
+        - text: Soluções Digitais Premium
+      - heading "Desenvolvemos sistemas que transformam negócios" [level=1] [ref=e20]:
+        - text: Desenvolvemos sistemas que transformam
+        - text: negócios
+      - paragraph [ref=e21]: Soluções digitais sob medida para empresas que querem crescer com tecnologia de alta performance e design premium.
+      - generic [ref=e22]:
+        - button "Solicitar Orçamento" [ref=e23]:
+          - generic [ref=e24]:
+            - text: Solicitar Orçamento
+            - img [ref=e25]
+        - button "Ver Soluções" [ref=e27]:
+          - generic [ref=e28]: Ver Soluções
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - generic [ref=e31]: 50+
+          - generic [ref=e32]: Projetos Entregues
+        - generic [ref=e33]:
+          - generic [ref=e34]: 99%
+          - generic [ref=e35]: Satisfação
+        - generic [ref=e36]:
+          - generic [ref=e37]: 24/7
+          - generic [ref=e38]: Suporte
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - paragraph [ref=e44]: O que fazemos
+        - heading "Nossos Serviços" [level=2] [ref=e45]
+        - paragraph [ref=e46]: Soluções completas para levar seu negócio ao próximo nível.
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - img [ref=e50]
+          - generic [ref=e54]:
+            - heading "Desenvolvimento de Sistemas" [level=3] [ref=e55]
+            - paragraph [ref=e56]: Criamos aplicações web e mobile robustas, escaláveis e de alta performance, utilizando as tecnologias mais modernas do mercado.
+          - list [ref=e57]:
+            - listitem [ref=e58]: Next.js & React
+            - listitem [ref=e60]: APIs RESTful
+            - listitem [ref=e62]: Banco de dados
+            - listitem [ref=e64]: Deploy & CI/CD
+        - generic [ref=e66]:
+          - img [ref=e68]
+          - generic [ref=e71]:
+            - heading "Automação de Processos" [level=3] [ref=e72]
+            - paragraph [ref=e73]: Eliminamos tarefas repetitivas e otimizamos fluxos de trabalho, liberando sua equipe para o que realmente importa.
+          - list [ref=e74]:
+            - listitem [ref=e75]: Automação de vendas
+            - listitem [ref=e77]: Integração de sistemas
+            - listitem [ref=e79]: Bots & IA
+            - listitem [ref=e81]: Workflows
+        - generic [ref=e83]:
+          - img [ref=e85]
+          - generic [ref=e87]:
+            - heading "Soluções Personalizadas" [level=3] [ref=e88]
+            - paragraph [ref=e89]: Cada negócio é único. Desenvolvemos soluções sob medida que se encaixam perfeitamente nas suas necessidades.
+          - list [ref=e90]:
+            - listitem [ref=e91]: Consultoria técnica
+            - listitem [ref=e93]: Arquitetura customizada
+            - listitem [ref=e95]: Integrações
+            - listitem [ref=e97]: Manutenção
+    - generic [ref=e102]:
+      - generic [ref=e103]:
+        - paragraph [ref=e104]: Portfólio
+        - heading "Nossos Produtos" [level=2] [ref=e105]
+        - paragraph [ref=e106]: Sistemas prontos e customizáveis para segmentos específicos do mercado.
+      - generic [ref=e107]:
+        - generic [ref=e108]:
+          - generic [ref=e109]:
+            - img [ref=e111]
+            - generic [ref=e114]: E-commerce
+          - generic [ref=e115]:
+            - heading "Loja em Shopping" [level=3] [ref=e116]
+            - paragraph [ref=e117]: Plataforma completa para lojistas em shoppings gerenciarem vendas, estoque e atendimento em um único lugar.
+          - button "Saiba mais →" [ref=e118]:
+            - text: Saiba mais
+            - generic [ref=e119]: →
+        - generic [ref=e120]:
+          - generic [ref=e121]:
+            - img [ref=e123]
+            - generic [ref=e127]: Mobilidade
+          - generic [ref=e128]:
+            - heading "Transporte Escolar" [level=3] [ref=e129]
+            - paragraph [ref=e130]: Sistema de gerenciamento de rotas, alunos, motoristas e comunicação com responsáveis em tempo real.
+          - button "Saiba mais →" [ref=e131]:
+            - text: Saiba mais
+            - generic [ref=e132]: →
+        - generic [ref=e133]:
+          - generic [ref=e134]:
+            - img [ref=e136]
+            - generic [ref=e141]: Food Tech
+          - generic [ref=e142]:
+            - heading "Pedidos para Lanchonetes" [level=3] [ref=e143]
+            - paragraph [ref=e144]: App de pedidos com cardápio digital, gestão de filas, impressão automática e relatórios de vendas.
+          - button "Saiba mais →" [ref=e145]:
+            - text: Saiba mais
+            - generic [ref=e146]: →
+        - generic [ref=e147]:
+          - generic [ref=e148]:
+            - img [ref=e150]
+            - generic [ref=e154]: Serviços
+          - generic [ref=e155]:
+            - heading "Agendamento para Lavagens" [level=3] [ref=e156]
+            - paragraph [ref=e157]: Sistema de agendamento online para lava-jatos com controle de horários, serviços, pagamentos e fidelização.
+          - button "Saiba mais →" [ref=e158]:
+            - text: Saiba mais
+            - generic [ref=e159]: →
+    - generic [ref=e163]:
+      - generic [ref=e164]:
+        - paragraph [ref=e165]: Por que nos escolher
+        - heading "Nossos Diferenciais" [level=2] [ref=e166]
+        - paragraph [ref=e167]: O que nos torna a escolha certa para o seu próximo projeto digital.
+      - generic [ref=e168]:
+        - generic [ref=e169]:
+          - generic [ref=e170]: "01"
+          - img [ref=e172]
+          - heading "Alta Performance" [level=3] [ref=e174]
+          - paragraph [ref=e175]: Aplicações otimizadas para velocidade máxima, com scores 90+ no Lighthouse, garantindo a melhor experiência ao usuário.
+        - generic [ref=e176]:
+          - generic [ref=e177]: "02"
+          - img [ref=e179]
+          - heading "Escalabilidade" [level=3] [ref=e182]
+          - paragraph [ref=e183]: Arquitetura pensada para crescer com seu negócio. Do MVP ao produto enterprise, suportamos qualquer demanda.
+        - generic [ref=e184]:
+          - generic [ref=e185]: "03"
+          - img [ref=e187]
+          - heading "Design Moderno" [level=3] [ref=e193]
+          - paragraph [ref=e194]: Interfaces premium que combinam estética e usabilidade, criando experiências digitais memoráveis.
+        - generic [ref=e195]:
+          - generic [ref=e196]: "04"
+          - img [ref=e198]
+          - heading "Suporte Contínuo" [level=3] [ref=e200]
+          - paragraph [ref=e201]: Acompanhamento pós-entrega, manutenção proativa e suporte técnico dedicado para manter tudo funcionando.
+    - generic [ref=e204]:
+      - img [ref=e206]
+      - heading "Pronto para transformar seu negócio?" [level=2] [ref=e211]:
+        - text: Pronto para transformar
+        - text: seu negócio?
+      - paragraph [ref=e212]: Vamos construir juntos a solução digital que sua empresa precisa. Entre em contato e receba uma proposta personalizada.
+      - button "Começar agora" [ref=e213]:
+        - text: Começar agora
+        - img [ref=e214]
+    - generic [ref=e219]:
+      - generic [ref=e220]:
+        - paragraph [ref=e221]: Entre em contato
+        - heading "Fale com a MaximWeb" [level=2] [ref=e222]
+        - paragraph [ref=e223]: Conte-nos sobre seu projeto e entraremos em contato em até 24 horas.
+      - generic [ref=e225]:
+        - generic [ref=e226]:
+          - generic [ref=e227]:
+            - img [ref=e228]
+            - text: Nome
+          - textbox "Nome" [ref=e231]:
+            - /placeholder: Seu nome completo
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - img [ref=e234]
+            - text: Email
+          - textbox "Email" [ref=e237]:
+            - /placeholder: seu@email.com
+        - generic [ref=e238]:
+          - generic [ref=e239]:
+            - img [ref=e240]
+            - text: Telefone
+          - textbox "Telefone" [ref=e242]:
+            - /placeholder: (11) 99999-9999
+        - generic [ref=e243]:
+          - generic [ref=e244]:
+            - img [ref=e245]
+            - text: Mensagem
+          - textbox "Mensagem" [ref=e247]:
+            - /placeholder: Descreva seu projeto, problema ou dúvida...
+        - button "Enviar Mensagem" [ref=e248]:
+          - generic [ref=e249]:
+            - img [ref=e250]
+            - text: Enviar Mensagem
+  - contentinfo [ref=e253]:
+    - generic [ref=e254]:
+      - generic [ref=e255]:
+        - generic [ref=e256]:
+          - link "MaximWeb" [ref=e257] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e259]
+            - generic [ref=e261]: MaximWeb
+          - paragraph [ref=e262]: Transformamos ideias em soluções digitais de alta performance, com design premium e tecnologia de ponta.
+          - generic [ref=e263]:
+            - link "GitHub" [ref=e264] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e265]
+            - link "LinkedIn" [ref=e269] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e270]
+            - link "Instagram" [ref=e273] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e274]
+            - link "Email" [ref=e277] [cursor=pointer]:
+              - /url: mailto:maximweb.com.br@gmail.com
+              - img [ref=e278]
+        - generic [ref=e281]:
+          - heading "Serviços" [level=3] [ref=e282]
+          - list [ref=e283]:
+            - listitem [ref=e284]:
+              - link "Desenvolvimento" [ref=e285] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e286]:
+              - link "Automação" [ref=e287] [cursor=pointer]:
+                - /url: "#services"
+            - listitem [ref=e288]:
+              - link "Soluções Customizadas" [ref=e289] [cursor=pointer]:
+                - /url: "#services"
+        - generic [ref=e290]:
+          - heading "Produtos" [level=3] [ref=e291]
+          - list [ref=e292]:
+            - listitem [ref=e293]:
+              - link "Shopping Digital" [ref=e294] [cursor=pointer]:
+                - /url: "#products"
+            - listitem [ref=e295]:
+              - link "Transporte Escolar" [ref=e296] [cursor=pointer]:
+                - /url: "#products"
+            - listitem [ref=e297]:
+              - link "Lanchonetes" [ref=e298] [cursor=pointer]:
+                - /url: "#products"
+            - listitem [ref=e299]:
+              - link "Lavagem de Carros" [ref=e300] [cursor=pointer]:
+                - /url: "#products"
+        - generic [ref=e301]:
+          - heading "Empresa" [level=3] [ref=e302]
+          - list [ref=e303]:
+            - listitem [ref=e304]:
+              - link "Diferenciais" [ref=e305] [cursor=pointer]:
+                - /url: "#differentials"
+            - listitem [ref=e306]:
+              - link "Contato" [ref=e307] [cursor=pointer]:
+                - /url: "#contact"
+      - generic [ref=e309]:
+        - paragraph [ref=e310]: © 2026 MaximWeb. Todos os direitos reservados.
+        - paragraph [ref=e311]: Feito com dedicação para transformar negócios.
+  - button "Open Next.js Dev Tools" [ref=e317] [cursor=pointer]:
+    - img [ref=e318]

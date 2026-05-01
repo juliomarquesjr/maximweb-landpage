@@ -1,0 +1,39 @@
+# MaximWeb Landing Page — Cursor Rules
+
+## Stack
+- Next.js 16 + React 19 + TypeScript 5 + Tailwind CSS v4 + Framer Motion 12 + lucide-react v1
+
+## Regras obrigatórias
+
+### Tailwind v4
+- NÃO crie `tailwind.config.ts` — toda configuração vai em `src/app/globals.css` dentro de `@theme {}`
+- Tokens já definidos: `brand-primary`, `brand-glow`, `bg-main`, `bg-secondary`, `bg-card`, `border-subtle`, `text-muted`, `font-inter`
+- Animações: `animate-glow-pulse`, `animate-float`, `animate-gradient-shift`
+- Gradiente no Tailwind v4: `bg-linear-to-b` (NÃO `bg-gradient-to-b`). Para gradientes complexos, prefira `style={}`
+
+### React / Next.js
+- Componentes com `useState`, `useEffect`, `useRef`, Framer Motion ou event handlers PRECISAM de `'use client'`
+- `Footer.tsx` e `layout.tsx` são Server Components intencionalmente — não adicione `'use client'`
+- Use `cn()` de `@/lib/utils` para classes condicionais
+
+### lucide-react v1
+- Ícones de marca REMOVIDOS: `Github`, `Linkedin`, `Instagram`, `Twitter`, `Facebook`
+- Antes de usar qualquer ícone: `node -e "const l=require('lucide-react'); console.log(!!l.NomeDoIcone)"`
+
+### Animações
+- Entrada de seção: `<SectionWrapper>` + filhos com `variants={itemVariants}`
+- `itemVariants` vem de `@/components/ui/SectionWrapper` (não recriar)
+- Hero usa animações locais próprias
+- Hover: `scale(1.03)` em GlowCard | `y: -6` em cards diretos
+
+## Estrutura
+```
+src/components/ui/       → Button, GlowCard, SectionWrapper
+src/components/layout/   → Navbar (client), Footer (server)
+src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm
+src/lib/utils.ts         → cn()
+src/app/globals.css      → @theme + keyframes + .glass .hero-grid etc.
+```
+
+## Verificação obrigatória
+Sempre execute `npm run build` antes de finalizar qualquer tarefa. Deve terminar com 0 erros TypeScript.

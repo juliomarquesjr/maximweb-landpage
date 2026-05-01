@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Theme Tokens (Tailwind v4) ────────────────────────────── */
+@theme {
+  --color-brand-primary: #3B82F6;
+  --color-brand-glow:    #60A5FA;
+  --color-bg-main:       #0B0B0F;
+  --color-bg-secondary:  #111118;
+  --color-bg-card:       #14142A;
+  --color-border-subtle: #272740;
+  --color-text-muted:    #6B7280;
+
+  --font-inter: var(--font-inter-var), sans-serif;
+
+  --animate-glow-pulse:     glow-pulse 2.5s ease-in-out infinite;
+  --animate-float:          float 4s ease-in-out infinite;
+  --animate-gradient-shift: gradient-shift 4s ease infinite;
+  --animate-fade-in-up:     fade-in-up 0.6s ease forwards;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Keyframes ─────────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px 4px rgba(59,130,246,0.35); }
+  50%       { box-shadow: 0 0 40px 8px rgba(96,165,250,0.55); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Base Reset ────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #0B0B0F;
+    color: #E2E8F0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Custom Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar              { width: 6px; }
+::-webkit-scrollbar-track        { background: #0B0B0F; }
+::-webkit-scrollbar-thumb        { background: #2D3748; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover  { background: #3B82F6; }
+
+/* ── Selection ─────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: #fff;
+}
+
+/* ── Hero Grid Background ──────────────────────────────────── */
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Glassmorphism ─────────────────────────────────────────── */
+.glass {
+  background: rgba(20, 20, 35, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ── Gradient Text ─────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #60A5FA 0%, #3B82F6 50%, #818CF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Gradient Button ───────────────────────────────────────── */
+.btn-gradient {
+  background: linear-gradient(135deg, #3B82F6, #60A5FA, #818CF8);
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-gradient:hover {
+  box-shadow: 0 0 32px 6px rgba(59,130,246,0.5);
+  transform: translateY(-2px);
+}
+
+/* ── Focus visible ring ────────────────────────────────────── */
+.focus-ring:focus-visible {
+  outline: 2px solid #3B82F6;
+  outline-offset: 2px;
+}
+
+/* ── Input dark style ──────────────────────────────────────── */
+.dark-input {
+  background: rgba(17, 17, 24, 0.8);
+  border: 1px solid rgba(30, 30, 46, 0.9);
+  color: #E2E8F0;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dark-input::placeholder {
+  color: #4B5563;
+}
+
+.dark-input:focus {
+  outline: none;
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.18), 0 0 16px rgba(59,130,246,0.12);
+}
+
+/* ── Section divider glow line ─────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(59,130,246,0.4) 50%,
+    transparent 100%
+  );
 }

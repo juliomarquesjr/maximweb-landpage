@@ -1,0 +1,45 @@
+# MaximWeb Landing Page — Windsurf Rules
+
+## Projeto
+Landing page premium para a agência MaximWeb. Dark UI com glassmorphism e animações Framer Motion.
+
+## Stack
+Next.js 16 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 · lucide-react v1
+
+## Antes de qualquer código
+
+1. **Tailwind v4**: Sem `tailwind.config.ts`. Tokens em `src/app/globals.css @theme {}`
+2. **lucide-react v1**: Ícones de marca foram removidos (Github, Instagram, Linkedin não existem)
+3. **`'use client'`**: Obrigatório em qualquer arquivo com hooks, Framer Motion ou event handlers
+4. **`cn()`**: Use sempre de `@/lib/utils` para classes condicionais
+5. **`npm run build`**: Deve passar antes de qualquer entrega
+
+## Tokens do design system
+
+| Classe | Uso |
+|---|---|
+| `bg-bg-main` (#0B0B0F) | Fundo de seções ímpares |
+| `bg-bg-secondary` (#111118) | Fundo de seções pares |
+| `bg-bg-card` (#14142A) | Fundo de cards (Differentials) |
+| `text-brand-glow` (#60A5FA) | Cor de ícones e destaques |
+| `bg-brand-primary` (#3B82F6) | Botões e bordas de acento |
+| `border-border-subtle` (#272740) | Bordas de cards |
+| `text-text-muted` (#6B7280) | Texto secundário |
+
+## Classes utilitárias globais
+`.glass` `.hero-grid` `.gradient-text` `.btn-gradient` `.dark-input` `.section-divider`
+
+## Padrão de animação de seções
+```tsx
+// SectionWrapper já gerencia useInView + stagger
+import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
+
+<SectionWrapper id="secao">
+  <motion.div variants={itemVariants}>conteúdo</motion.div>
+</SectionWrapper>
+```
+
+## Documentação completa
+- `AGENTS.md` — guia técnico para automação
+- `docs/ARCHITECTURE.md` — padrões de composição e decisões
+- `docs/DESIGN_TOKENS.md` — referência visual completa
