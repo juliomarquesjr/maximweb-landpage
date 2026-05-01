@@ -89,16 +89,17 @@ $htmlBody = '<p><strong>Nova mensagem</strong> — formulário MaximWeb</p>'
     . '</ul>'
     . '<p><strong>Mensagem</strong></p><p>' . $safeMsg . '</p>';
 
-try {
-    $payload = json_encode([
-        'from'     => $mailFrom,
-        'to'       => [$mailTo],
-        'subject'  => $subject,
-        'text'     => $textBody,
-        'html'     => $htmlBody,
-        'reply_to' => $email,
-    ], JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
-} catch (JsonException) {
+$payload = json_encode([
+    'from'     => $mailFrom,
+    'to'       => [$mailTo],
+    'subject'  => $subject,
+    'text'     => $textBody,
+    'html'     => $htmlBody,
+    'reply_to' => $email,
+], JSON_UNESCAPED_UNICODE);
+
+if ($payload === false) {
+    error_log('[contact.php] json_encode: ' . json_last_error_msg());
     http_response_code(500);
     echo json_encode(['error' => 'Erro ao montar mensagem'], JSON_UNESCAPED_UNICODE);
     exit;
