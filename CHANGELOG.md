@@ -8,8 +8,10 @@ O formato segue [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added
+- Envio do formulário de contato: `public/contact.php` + API Resend (config em `contact.config.local.php`)
+
 ### Planned
-- Endpoint real para o formulário de contato (`/api/contact`)
 - OG image dinâmica (`opengraph-image.tsx`)
 - Página de política de privacidade
 

@@ -61,14 +61,15 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 
 | Source | Title | SHA-256 |
 |---|---|---|
-| [.github/copilot-instructions.md](../../../.github/copilot-instructions.md) | GitHub Copilot Instructions — MaximWeb Landing Page | `3f71a7d4620cf0fe` |
+| [.github/copilot-instructions.md](../../../.github/copilot-instructions.md) | GitHub Copilot Instructions — MaximWeb Landing Page | `c15114eea0ce7fee` |
 | [adr/001-tailwind-v4-sem-config.md](../../../adr/001-tailwind-v4-sem-config.md) | ADR 001 — Tailwind CSS v4 sem tailwind.config.ts | `9f2537144759be2c` |
 | [adr/002-framer-motion-scroll-reveal.md](../../../adr/002-framer-motion-scroll-reveal.md) | ADR 002 — Framer Motion para scroll reveal via SectionWrapper | `2c8f06b6cbfb446c` |
-| [adr/003-sem-imagens-externas.md](../../../adr/003-sem-imagens-externas.md) | ADR 003 — Design sem imagens externas | `e47582c901665529` |
+| [adr/003-sem-imagens-externas.md](../../../adr/003-sem-imagens-externas.md) | ADR 003 — Design sem imagens externas | `54d3cc97f9075c9d` |
 | [adr/004-server-client-boundary.md](../../../adr/004-server-client-boundary.md) | ADR 004 — Estratégia Client/Server Component boundary | `05706031657cdb47` |
-| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `2987864841ab94e3` |
-| [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `c6a5c399b26da638` |
-| [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `97675d8df7bd0b84` |
+| [adr/005-formulario-contato-php-resend.md](../../../adr/005-formulario-contato-php-resend.md) | ADR 005 — Formulário de contato via PHP (cPanel) + Resend | `a3d349e134e61e99` |
+| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `33e5a385d9d9ffe1` |
+| [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `5ff826999649f994` |
+| [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `d620f83b27a3b6da` |
 | [docs/DESIGN_TOKENS.md](../../DESIGN_TOKENS.md) | Design Tokens — MaximWeb Landing Page | `7edfebf1cf038af2` |
 | [docs/multiagentes/checklist.md](../../multiagentes/checklist.md) | Checklist de Validacao — Landing Page | `feb3e6c272c1a37c` |
 | [docs/multiagentes/README.md](../../multiagentes/README.md) | Playbook de Multiagentes — MaximWeb | `82f46c02f148efdb` |
@@ -78,5 +79,5 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [docs/multiagentes/templates/prompt-base.md](../../multiagentes/templates/prompt-base.md) | Prompt Base para Multiagentes | `be03197b41f371f3` |
 | [docs/multiagentes/templates/qa-performance.md](../../multiagentes/templates/qa-performance.md) | Prompt — QA/Performance | `1a71063d1187d31f` |
 | [docs/multiagentes/templates/ui-engineer.md](../../multiagentes/templates/ui-engineer.md) | Prompt — UI Engineer | `d0ccf2479a2e800b` |
-| [package.json](../../../package.json) | package.json | `2927eaef74e99593` |
-| [README.md](../../../README.md) | MaximWeb — Landing Page | `062e717b08d10652` |
+| [package.json](../../../package.json) | package.json | `c32a1faa7cef0eac` |
+| [README.md](../../../README.md) | MaximWeb — Landing Page | `162fc219162e367b` |

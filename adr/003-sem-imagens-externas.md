@@ -19,14 +19,14 @@ Toda a estética visual é implementada com:
 - **Glassmorphism** via `backdrop-filter: blur`
 - **Tipografia como elemento visual** (tamanhos grandes, gradient-text)
 
-Nenhum `<Image>` do Next.js é usado. Nenhum arquivo em `public/` é necessário para o funcionamento.
+Nenhum `<Image>` do Next.js é usado. Para a **estética** da página, nenhum asset de imagem em `public/` é necessário. **Exceção (não-visual):** o formulário de contato em produção usa `public/contact.php` e config PHP na mesma pasta pública (ver ADR 005).
 
 ---
 
 ## Consequências
 
 **Positivas:**
-- Zero dependência de assets externos — a página funciona sem nenhum arquivo adicional
+- Zero dependência de imagens em `public/` para layout, glows e ícones
 - Performance: sem requisições de imagem, sem LCP dependente de download
 - Manutenção: nenhum asset para versionar ou atualizar
 - Responsividade: gradientes e SVGs escalam perfeitamente

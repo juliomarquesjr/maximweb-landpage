@@ -71,6 +71,10 @@ Next.js 16 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer
 ### `TechMarquee.tsx`
 - Server component puro — sem `'use client'`, sem hooks
 
+### `ContactForm` + `contact.php`
+- Client: POST JSON para `/contact.php`; 503 → estado `unavailable`
+- Produção: PHP + Resend; `public/contact.config.local.php` (não versionar) com API key e e-mails
+
 ---
 
 ## Padrão de animação de seções
@@ -90,6 +94,7 @@ import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 ## Estrutura
 
 ```
+public/contact.php       → formulário → Resend (cPanel)
 src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
 src/components/layout/   → Navbar (client), Footer (server)
 src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm

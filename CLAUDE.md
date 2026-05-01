@@ -12,6 +12,7 @@ Este é o repositório da landing page da agência **MaximWeb**. Leia os documen
 | [AGENTS.md](AGENTS.md) | Guia técnico completo — gotchas, tokens, convenções, regras |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Padrões de código, commits, branch naming, PR checklist |
 | [docs/knowledge/00-index.md](docs/knowledge/00-index.md) | Vault Obsidian com memoria tecnica navegavel para agentes |
+| [adr/005-formulario-contato-php-resend.md](adr/005-formulario-contato-php-resend.md) | Decisão: contato via `public/contact.php` + Resend (cPanel) |
 
 ## Antes de qualquer tarefa
 
@@ -27,6 +28,7 @@ Este é o repositório da landing page da agência **MaximWeb**. Leia os documen
 Se a tarefa adicionou, removeu ou alterou qualquer um dos itens abaixo, **atualize todos os arquivos de documentação listados** antes de encerrar:
 
 **Gatilhos de atualização:**
+- Novo ou alterado endpoint de contato (`public/contact.php`, config PHP) ou fluxo Resend
 - Novo componente em `src/components/`
 - Nova prop relevante em componente existente (ex: variante, comportamento, flag)
 - Nova classe utilitária ou keyframe em `globals.css`

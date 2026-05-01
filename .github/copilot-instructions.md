@@ -18,15 +18,20 @@
 ## Estrutura de componentes
 
 ```
+public/
+  contact.php                    → POST JSON → validação → API Resend (cURL); config: contact.config.local.php
+  contact.config.example.php     → modelo (sem segredos)
 src/components/
   ui/          → Button, GlowCard, SectionWrapper (reutilizáveis)
   layout/      → Navbar, Footer
-  sections/    → Hero, Services, Products, Differentials, CTA, ContactForm
+  sections/    → Hero, Services, Products, Differentials, CTA, ContactForm (POST /contact.php)
 src/lib/
   utils.ts     → cn() helper
 src/app/
   globals.css  → @theme tokens + keyframes + .glass .hero-grid etc.
 ```
+
+**Formulário:** em produção no cPanel, o envio não passa por Route Handlers Next; segredos ficam no PHP (gitignored). Em `npm run dev`, `/contact.php` não é servido pelo Next.
 
 ## Padrão de animação
 

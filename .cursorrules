@@ -57,6 +57,10 @@ Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 ·
 - Server component (sem `'use client'`)
 - CSS `animate-marquee` para scroll infinito
 
+### ContactForm (`src/components/sections/ContactForm.tsx`) + `public/contact.php`
+- Client: `fetch('/contact.php', { body: JSON.stringify(form) })`; estados `success` | `error` | `unavailable` (503)
+- Servidor (cPanel / PHP): `contact.php` valida, chama API Resend via cURL; segredos em `contact.config.local.php` (gitignored). Sem config → 503
+
 ---
 
 ## Classes CSS globais (`src/app/globals.css`)
@@ -77,6 +81,7 @@ Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 ·
 ## Estrutura de componentes
 
 ```
+public/contact.php       → POST do formulário → Resend (config PHP local)
 src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
 src/components/layout/   → Navbar (client, scroll progress bar), Footer (server)
 src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm

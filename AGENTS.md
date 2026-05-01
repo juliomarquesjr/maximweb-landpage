@@ -34,6 +34,10 @@ Use generic substitutes: `GitBranch`, `Link`, `Camera`, etc.
 ## Project Architecture
 
 ```
+public/
+  contact.php                  — POST JSON (nome, email, telefone, mensagem); valida; cURL → Resend;
+                                 secrets em contact.config.local.php (gitignored; ver contact.config.example.php)
+  contact.config.example.php   — template de config para cPanel
 src/
   app/
     layout.tsx          — Inter font, suppressHydrationWarning on <html>, metadata pt-BR
@@ -67,7 +71,7 @@ src/
       Differentials.tsx — 4 cards (bg-bg-card + gradient-border-card top-accent hover);
                           whileHover y:-6; AnimatedHeading title
       CTA.tsx           — AnimatedHeading; magnetic primary Button; animate-glow-pulse
-      ContactForm.tsx   — client-side validation; setTimeout stub → replace with real endpoint;
+      ContactForm.tsx   — client-side validation; POST para `/contact.php`; estado `unavailable` se 503;
                           AnimatedHeading title
 ```
 
@@ -156,7 +160,7 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 
 ---
 
-- `ContactForm.tsx`: `handleSubmit` uses `setTimeout` to simulate a POST. Replace with `fetch('/api/contact', ...)` when a backend route is added.
+- **Contato (produção cPanel / PHP):** copie `public/contact.config.example.php` → `contact.config.local.php` na mesma pasta pública do site; preencha `resend_api_key`, `mail_from` (domínio verificado no Resend), `mail_to`. Sem isso, `contact.php` responde 503. Em `npm run dev`, `/contact.php` não é servido pelo Next — testar envio no servidor ou stack Apache+PHP.
 - `Footer.tsx`: Social icon `href` values are `#` placeholders. Replace with real URLs.
 - `suppressHydrationWarning` on `<html>` is intentional — suppresses mismatches caused by browser extensions (e.g., LanguageTool) that inject attributes on the client.
 
@@ -175,6 +179,7 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 9. **`AnimatedHeading` fires independently** — it uses its own `useInView`, not the parent `SectionWrapper` stagger. Place it inside a `motion.div variants={itemVariants}` wrapper only if you want the surrounding block (label + subtitle) to stagger together. The heading itself always animates word-by-word on its own.
 10. **`gradient-border-card` is CSS-only** — it uses a `::before` pseudo-element (top accent line). It does NOT use `isolation: isolate` or negative z-index. Safe to combine with any Framer Motion `motion.div`.
 11. **Keep the Obsidian vault current** — run `npm run knowledge:sync` after updating structural docs, ADRs, agent rules, or technical patterns.
+12. **Contato em produção (cPanel)** — `ContactForm` chama `/contact.php`; segredos só em `contact.config.local.php` (não versionar). Não reintroduzir `src/app/api/contact` para o deploy estático descrito no README.
 
 ---
 
@@ -193,6 +198,9 @@ This project serves multiple AI agents. Every agent has its own rules file. **Wh
 | `CLAUDE.md` | Claude Code (auto-loaded) | Update triggers, multi-agent sync reminder |
 | `.claude/settings.json` | Claude Code | Stop hook: reminder fires automatically at session end |
 | `docs/knowledge/` | Obsidian + agents | Navigable technical memory, generated indexes, patterns |
+| `docs/ARCHITECTURE.md` | Humanos + agentes | Composição, fluxos, fronteiras client/server |
+| `adr/` | Decisões duradouras | ADRs versionadas; decisões de contato/deploy em ADR 005 |
+| `.github/copilot-instructions.md` | GitHub Copilot | Stack, estrutura, regras rápidas |
 
 ### What to update in each file
 
@@ -206,6 +214,14 @@ This project serves multiple AI agents. Every agent has its own rules file. **Wh
 - Project structure tree (new files)
 - Design System tables (new tokens, utilities)
 - Seções table (new or reordered sections)
+- Deploy / formulário (PHP, Resend, `contact.config.local.php`) quando o fluxo mudar
+
+**docs/ARCHITECTURE.md** — update:
+- Visão geral e diagramas se fronteiras ou fluxos mudarem (ex.: contato)
+
+**adr/** — criar ou atualizar ADR quando a decisão for duradoura (ex.: ADR 005 — contato)
+
+**.github/copilot-instructions.md** — manter estrutura `public/` e nota do formulário alinhadas ao código
 
 **.cursorrules** — update:
 - "Componentes UI" section (new component, new props, new gotchas)

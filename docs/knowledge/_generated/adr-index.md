@@ -11,8 +11,9 @@ Durable technical decisions live in `adr/`. This generated page indexes them for
 |---|---|---|---|
 | [ADR 001 — Tailwind CSS v4 sem tailwind.config.ts](../../../adr/001-tailwind-v4-sem-config.md) | 2026-05-01 | Aceito | `9f2537144759be2c` |
 | [ADR 002 — Framer Motion para scroll reveal via SectionWrapper](../../../adr/002-framer-motion-scroll-reveal.md) | 2026-05-01 | Aceito | `2c8f06b6cbfb446c` |
-| [ADR 003 — Design sem imagens externas](../../../adr/003-sem-imagens-externas.md) | 2026-05-01 | Aceito | `e47582c901665529` |
+| [ADR 003 — Design sem imagens externas](../../../adr/003-sem-imagens-externas.md) | 2026-05-01 | Aceito | `54d3cc97f9075c9d` |
 | [ADR 004 — Estratégia Client/Server Component boundary](../../../adr/004-server-client-boundary.md) | 2026-05-01 | Aceito | `05706031657cdb47` |
+| [ADR 005 — Formulário de contato via PHP (cPanel) + Resend](../../../adr/005-formulario-contato-php-resend.md) | 2026-05-01 | Aceito | `a3d349e134e61e99` |
 
 ## Decision Headings
 
@@ -51,3 +52,13 @@ Source: [adr/004-server-client-boundary.md](../../../adr/004-server-client-bound
   - Contexto
   - Decisão
   - Consequências
+
+### ADR 005 — Formulário de contato via PHP (cPanel) + Resend
+
+Source: [adr/005-formulario-contato-php-resend.md](../../../adr/005-formulario-contato-php-resend.md)
+
+- ADR 005 — Formulário de contato via PHP (cPanel) + Resend
+  - Contexto
+  - Decisão
+  - Consequências
+  - Referências

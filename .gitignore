@@ -36,6 +36,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
+
+# PHP contact form — secrets (cPanel / cópia local)
+public/contact.config.local.php
 
 # vercel
 .vercel

@@ -41,6 +41,18 @@ npm run dev
 
 Abra [http://localhost:3000](http://localhost:3000) no navegador.
 
+### Formulário de contato (PHP + Resend no cPanel)
+
+O envio **não** usa variáveis Node. Em produção o browser faz `POST /contact.php` (mesmo domínio). O script PHP chama a [API Resend](https://resend.com) (plano gratuito com limites).
+
+1. Crie conta Resend, gere API key e verifique o domínio do remetente (`mail_from`).
+2. No servidor, copie [`public/contact.config.example.php`](public/contact.config.example.php) para **`contact.config.local.php`** na mesma pasta pública que `index.html` (e o mesmo diretório que `contact.php`).
+3. Preencha `resend_api_key`, `mail_from` (ex.: `Contato <contato@seudominio.com.br>`), `mail_to` (ex.: `julio@email.com.br`). O arquivo `contact.config.local.php` está no [`.gitignore`](.gitignore).
+
+**`npm run dev`:** o Next não executa PHP — `/contact.php` não envia neste modo. Teste o formulário no cPanel ou num ambiente Apache+PHP.
+
+Decisão arquitetural: [adr/005-formulario-contato-php-resend.md](adr/005-formulario-contato-php-resend.md).
+
 ---
 
 ## Scripts disponíveis
@@ -62,7 +74,10 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador.
 maximweb-landpage/
 ├── .claude/
 │   └── settings.json          # Configuração do MCP Playwright (testes visuais)
-├── public/                    # Assets estáticos
+├── adr/                       # Architecture Decision Records (ex.: 005 — contato PHP + Resend)
+├── public/                    # Assets estáticos + contact.php (formulário → Resend)
+│   ├── contact.php            # Handler PHP (cPanel); config em contact.config.local.php
+│   └── contact.config.example.php
 ├── src/
 │   ├── app/
 │   │   ├── globals.css        # Tailwind @theme + keyframes + utilitários globais
@@ -78,7 +93,7 @@ maximweb-landpage/
 │   │   │   ├── Products.tsx   # Produtos (4 GlowCards com glows coloridos)
 │   │   │   ├── Differentials.tsx # Diferenciais (4 cards com top-accent hover)
 │   │   │   ├── CTA.tsx        # Call to action com botão pulsante e magnético
-│   │   │   └── ContactForm.tsx # Formulário de contato com validação client-side
+│   │   │   └── ContactForm.tsx # Formulário de contato → POST /contact.php
 │   │   └── ui/
 │   │       ├── Button.tsx     # Botão reutilizável; props: variant, size, loading, magnetic
 │   │       ├── GlowCard.tsx   # Card glassmorphism com 3D tilt e hover glow
@@ -147,7 +162,7 @@ Fonte principal: **Inter** (via `next/font/google`)
 | 4 | `Products.tsx` | `bg-secondary` | 4 GlowCards com glow colorido por card |
 | 5 | `Differentials.tsx` | `bg-main` | Top-accent hover, hover y:-6 |
 | 6 | `CTA.tsx` | `bg-secondary` | Botão magnético pulsante |
-| 7 | `ContactForm.tsx` | `bg-main` | Validação client-side |
+| 7 | `ContactForm.tsx` | `bg-main` | Validação + POST `/contact.php` |
 | — | `Footer.tsx` | `bg-secondary` | Server component |
 
 ---
@@ -164,9 +179,8 @@ O projeto inclui o [Playwright MCP](https://github.com/microsoft/playwright-mcp)
 
 ## TODOs conhecidos
 
-- [ ] Conectar `ContactForm` a um endpoint real (substituir o `setTimeout` stub)
+- [ ] Configurar `contact.config.local.php` no servidor (Resend) para o formulário enviar e-mail
 - [ ] Adicionar URLs reais nos links de redes sociais do `Footer`
-- [ ] Adicionar rota `/api/contact` com envio de e-mail (ex: Resend)
 - [ ] Implementar OG image dinâmica (`opengraph-image.tsx`)
 - [ ] Adicionar página de política de privacidade
 
@@ -174,7 +188,15 @@ O projeto inclui o [Playwright MCP](https://github.com/microsoft/playwright-mcp)
 
 ## Deploy
 
-O deploy mais simples é via [Vercel](https://vercel.com):
+### Site estático + cPanel (PHP)
+
+1. Gere os arquivos do front (por exemplo `npm run build` e, se usar export estático, `output: 'export'` em `next.config.ts` — opcional; alinhe com o fluxo da sua hospedagem).
+2. Envie para a raiz pública (`public_html` ou subpasta do domínio) o HTML/JS/CSS do Next **e** os ficheiros `contact.php`, `contact.config.example.php` e a cópia preenchida `contact.config.local.php`.
+3. Confirme que a extensão PHP está ativa e que **cURL** está habilitado.
+
+### Vercel / Node
+
+O deploy mais simples em plataforma Node é via [Vercel](https://vercel.com):
 
 ```bash
 # Instalar Vercel CLI

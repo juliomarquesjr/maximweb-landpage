@@ -6,7 +6,7 @@ Este documento explica as decisões de design do sistema, padrões de composiç�
 
 ## Visão geral
 
-A página é uma **single-page application estática** (Next.js SSG). Não há roteamento, API routes (por enquanto) ou estado global. Toda a interatividade é local a cada componente.
+A página é uma **single-page application** gerada pelo Next.js (conteúdo pré-renderizado). Não há roteamento interno nem estado global; a interatividade é local a cada componente. **Não há Route Handlers** em `src/app/api/` para o fluxo de deploy estático no cPanel; o envio do formulário é feito por **`public/contact.php`** no Apache (ver secção “Formulário de contato” abaixo).
 
 ```
 Browser
@@ -18,8 +18,10 @@ Browser
               ├── Products (Client)  ← scroll reveal
               ├── Differentials (Client) ← scroll reveal
               ├── CTA (Client)       ← whileInView
-              └── ContactForm (Client) ← form state
+              └── ContactForm (Client) ← form state; POST /contact.php (produção)
         └── Footer (Server)
+
+Produção (cPanel): ContactForm → POST /contact.php → Resend → e-mail
 ```
 
 ---
@@ -151,17 +153,12 @@ Classes utilitárias globais (`.glass`, `.hero-grid`, etc.) são definidas em `g
 
 ## Formulário de contato
 
-### Estado atual (stub)
 ```
-handleSubmit → validate() → setTimeout(1800ms) → setStatus('success')
-```
-
-### Integração real (quando backend estiver pronto)
-```
-handleSubmit → validate() → fetch('/api/contact', { method: 'POST', body: JSON.stringify(form) })
+handleSubmit → validate() → fetch('/contact.php') → PHP valida → cURL Resend → e-mail (mail_to)
 ```
 
-A rota de API deve ser criada em `src/app/api/contact/route.ts` seguindo o padrão de Route Handlers do Next.js App Router.
+- Handler: `public/contact.php` (cPanel / Apache). Config: `contact.config.local.php` (`resend_api_key`, `mail_from`, `mail_to`). Sem config → 503; o client exibe estado `unavailable`.
+- Reply-To no e-mail: endereço informado pelo visitante no formulário.
 
 ---
 

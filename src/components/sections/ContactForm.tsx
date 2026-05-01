@@ -51,7 +51,7 @@ export default function ContactForm() {
   const [form,    setForm]    = useState<FormState>({ nome: '', email: '', telefone: '', mensagem: '' })
   const [errors,  setErrors]  = useState<FieldError>({})
   const [loading, setLoading] = useState(false)
-  const [status,  setStatus]  = useState<'idle' | 'success' | 'error'>('idle')
+  const [status,  setStatus]  = useState<'idle' | 'success' | 'error' | 'unavailable'>('idle')
 
   const handleChange = (field: keyof FormState, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }))
@@ -66,8 +66,17 @@ export default function ContactForm() {
     setLoading(true)
     setStatus('idle')
     try {
-      // Replace with real endpoint when backend is available
-      await new Promise(r => setTimeout(r, 1800))
+      const res = await fetch('/contact.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (!res.ok) {
+        setStatus(res.status === 503 ? 'unavailable' : 'error')
+        return
+      }
+
       setStatus('success')
       setForm({ nome: '', email: '', telefone: '', mensagem: '' })
     } catch {
@@ -175,6 +184,14 @@ export default function ContactForm() {
                                 border border-red-500/20 rounded-xl px-4 py-3">
                   <AlertCircle className="w-4 h-4 shrink-0" />
                   Ocorreu um erro. Por favor, tente novamente.
+                </div>
+              )}
+              {status === 'unavailable' && (
+                <div className="flex items-center gap-2 text-amber-400 text-sm bg-amber-500/10
+                                border border-amber-500/20 rounded-xl px-4 py-3">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  O envio de mensagens não está disponível no momento. Tente mais tarde ou use o email
+                  na seção de contato.
                 </div>
               )}
 

@@ -173,20 +173,9 @@ Para novos componentes visuais, siga:
 
 ## Formulário de Contato
 
-O `ContactForm` usa um `setTimeout` para simular o envio. Para implementar o envio real:
+O client envia `POST /contact.php` (JSON). O PHP valida e chama a API Resend (`public/contact.php`). Segredos em `public/contact.config.local.php` (gitignored; modelo em `contact.config.example.php`). Resposta 503 se a config não existir ou estiver incompleta.
 
-1. Crie `src/app/api/contact/route.ts`
-2. Substitua o stub no `handleSubmit`:
-
-```ts
-// Substituir em ContactForm.tsx
-const res = await fetch('/api/contact', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(form),
-})
-if (!res.ok) throw new Error('send failed')
-```
+Decisão arquitetural registrada em [`adr/005-formulario-contato-php-resend.md`](adr/005-formulario-contato-php-resend.md).
 
 ---
 
