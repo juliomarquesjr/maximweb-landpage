@@ -14,6 +14,7 @@ Durable technical decisions live in `adr/`. This generated page indexes them for
 | [ADR 003 — Design sem imagens externas](../../../adr/003-sem-imagens-externas.md) | 2026-05-01 | Aceito | `54d3cc97f9075c9d` |
 | [ADR 004 — Estratégia Client/Server Component boundary](../../../adr/004-server-client-boundary.md) | 2026-05-01 | Aceito | `05706031657cdb47` |
 | [ADR 005 — Formulário de contato via PHP (cPanel) + Resend](../../../adr/005-formulario-contato-php-resend.md) | 2026-05-01 | Aceito | `a3d349e134e61e99` |
+| [ADR 006 — Deploy local para cPanel via FTP/FTPS](../../../adr/006-deploy-local-cpanel-ftp.md) | 2026-05-01 | Aceito | `2e9860c9537de685` |
 
 ## Decision Headings
 
@@ -62,3 +63,13 @@ Source: [adr/005-formulario-contato-php-resend.md](../../../adr/005-formulario-c
   - Decisão
   - Consequências
   - Referências
+
+### ADR 006 — Deploy local para cPanel via FTP/FTPS
+
+Source: [adr/006-deploy-local-cpanel-ftp.md](../../../adr/006-deploy-local-cpanel-ftp.md)
+
+- ADR 006 — Deploy local para cPanel via FTP/FTPS
+  - Contexto
+  - Decisao
+  - Consequencias
+  - Referencias

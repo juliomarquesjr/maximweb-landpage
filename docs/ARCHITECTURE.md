@@ -166,7 +166,9 @@ handleSubmit → validate() → fetch('/contact.php') → PHP valida → cURL Re
 
 - Deploy local: `npm run deploy:cpanel` usa `scripts/deploy-cpanel.mjs` para enviar `out/` ao cPanel.
 - O deploy local suporta `CPANEL_FTP_CONCURRENCY` (máximo `2`) para upload simultâneo em hosts compartilhados.
+- O envio só inicia após todos os workers conectarem; em terminal interativo, o script mostra barra de progresso e eventos de conexão.
 - Segurança: o deploy local ignora `contact.config.local.php`, mantendo o segredo somente no servidor.
+- Decisão formal: `adr/006-deploy-local-cpanel-ftp.md`.
 
 ---
 

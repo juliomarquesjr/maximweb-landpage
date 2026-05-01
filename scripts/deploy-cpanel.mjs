@@ -8,9 +8,135 @@ const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(scriptDir, "..");
 const outDir = path.join(rootDir, "out");
 const publicDir = path.join(rootDir, "public");
+const isInteractive = Boolean(process.stdout.isTTY);
+const supportsColor = isInteractive && !process.env.NO_COLOR;
 
 const EXCLUDED_FILES = new Set(["contact.config.local.php"]);
 const PHP_FILES_TO_COPY = ["contact.php", "contact.config.example.php"];
+
+const colors = {
+  reset: "\x1b[0m",
+  dim: "\x1b[2m",
+  cyan: "\x1b[36m",
+  green: "\x1b[32m",
+  yellow: "\x1b[33m",
+  red: "\x1b[31m",
+};
+
+function paint(color, text) {
+  if (!supportsColor) {
+    return text;
+  }
+  return `${color}${text}${colors.reset}`;
+}
+
+function renderBar(current, total, width = 24) {
+  const ratio = total === 0 ? 0 : current / total;
+  const filled = Math.round(ratio * width);
+  return `${"#".repeat(filled)}${"-".repeat(width - filled)}`;
+}
+
+function createReporter(totalFiles, workerCount) {
+  let completed = 0;
+  let connectedWorkers = 0;
+  let lastUploaded = "";
+  let phase = "connecting";
+  let transientLine = "";
+
+  function clearTransientLine() {
+    if (!isInteractive) {
+      return;
+    }
+    process.stdout.write("\r\x1b[2K");
+    transientLine = "";
+  }
+
+  function drawTransientLine(line) {
+    if (!isInteractive) {
+      return;
+    }
+    transientLine = line;
+    process.stdout.write(`\r\x1b[2K${line}`);
+  }
+
+  function renderStatusLine() {
+    if (!isInteractive) {
+      return;
+    }
+
+    if (phase === "connecting") {
+      drawTransientLine(
+        `${paint(colors.cyan, "Conectando")} workers ${connectedWorkers}/${workerCount}...`,
+      );
+      return;
+    }
+
+    if (phase === "uploading") {
+      const percent = totalFiles === 0
+        ? 0
+        : Math.round((completed / totalFiles) * 100);
+      const bar = renderBar(completed, totalFiles);
+      const line =
+        `${paint(colors.cyan, "Progresso")} [${bar}] ${String(percent).padStart(3, " ")}% ` +
+        `(${completed}/${totalFiles})` +
+        (lastUploaded ? ` | ${lastUploaded}` : "");
+      drawTransientLine(line);
+    }
+  }
+
+  function printEvent(level, color, message) {
+    const tag = paint(color, `[${level}]`);
+
+    clearTransientLine();
+    console.log(`${tag} ${message}`);
+    renderStatusLine();
+  }
+
+  return {
+    start() {
+      renderStatusLine();
+    },
+    connected(workerId) {
+      connectedWorkers += 1;
+      printEvent("OK", colors.green, `Conexao estabelecida (W${workerId}).`);
+    },
+    disconnected(workerId) {
+      printEvent("INFO", colors.dim, `Conexao finalizada (W${workerId}).`);
+    },
+    uploadsStarted() {
+      phase = "uploading";
+      printEvent("OK", colors.green, "Todos os workers conectados. Iniciando upload...");
+    },
+    uploaded(workerId, relativePath) {
+      completed += 1;
+      lastUploaded = `W${workerId}: ${relativePath.split(path.sep).join("/")}`;
+
+      if (!isInteractive) {
+        printEvent(
+          "UPLOAD",
+          colors.cyan,
+          `${completed}/${totalFiles} ${lastUploaded}`,
+        );
+        return;
+      }
+
+      renderStatusLine();
+    },
+    fail(message) {
+      phase = "done";
+      clearTransientLine();
+      printEvent("ERRO", colors.red, message);
+    },
+    complete() {
+      phase = "done";
+      clearTransientLine();
+      printEvent("OK", colors.green, `Upload finalizado (${completed}/${totalFiles}).`);
+      if (!isInteractive && transientLine) {
+        console.log(transientLine);
+      }
+    },
+  };
+}
 
 async function loadEnvFiles() {
   const envFiles = [".env", ".env.local"];
@@ -168,6 +294,34 @@ function toRemotePath(remoteDir, relativePath) {
 async function uploadFiles(config, files) {
   const queue = [...files];
   const workerCount = Math.min(config.concurrency, queue.length);
+  const reporter = createReporter(files.length, workerCount);
+  reporter.start();
+  let connectedWorkers = 0;
+
+  let releaseUploads;
+  let failUploads;
+  let uploadsGateState = "pending";
+  const uploadsReady = new Promise((resolve, reject) => {
+    releaseUploads = resolve;
+    failUploads = reject;
+  });
+
+  function startUploadsIfReady() {
+    if (connectedWorkers !== workerCount || uploadsGateState !== "pending") {
+      return;
+    }
+    uploadsGateState = "open";
+    reporter.uploadsStarted();
+    releaseUploads();
+  }
+
+  function rejectUploads(error) {
+    if (uploadsGateState !== "pending") {
+      return;
+    }
+    uploadsGateState = "failed";
+    failUploads(error);
+  }
 
   async function runWorker(workerId) {
     const client = new Client();
@@ -175,6 +329,7 @@ async function uploadFiles(config, files) {
     const ensuredDirs = new Set();
 
     try {
+      console.log(`${paint(colors.dim, "[INFO]")} Conectando worker ${workerId}...`);
       await client.access({
         host: config.host,
         user: config.user,
@@ -182,6 +337,10 @@ async function uploadFiles(config, files) {
         port: config.port,
         secure: config.secure,
       });
+      reporter.connected(workerId);
+      connectedWorkers += 1;
+      startUploadsIfReady();
+      await uploadsReady;
 
       while (queue.length > 0) {
         const relativePath = queue.pop();
@@ -199,16 +358,27 @@ async function uploadFiles(config, files) {
         }
 
         await client.uploadFrom(localPath, remotePath);
-        console.log(`[W${workerId}] Upload: ${relativePath}`);
+        reporter.uploaded(workerId, relativePath);
       }
+    } catch (error) {
+      rejectUploads(error);
+      throw error;
     } finally {
       client.close();
+      reporter.disconnected(workerId);
     }
   }
 
-  await Promise.all(
-    Array.from({ length: workerCount }, (_, index) => runWorker(index + 1)),
-  );
+  try {
+    await Promise.all(
+      Array.from({ length: workerCount }, (_, index) => runWorker(index + 1)),
+    );
+    reporter.complete();
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Erro desconhecido.";
+    reporter.fail(message);
+    throw error;
+  }
 }
 
 async function main() {
@@ -224,13 +394,13 @@ async function main() {
   console.log(`Arquivos para deploy: ${files.length}`);
   console.log(`Conexoes simultaneas: ${config.concurrency}`);
   if (config.dryRun) {
-    console.log("Modo dry-run ativo. Nenhum upload sera executado.");
+    console.log(paint(colors.yellow, "Modo dry-run ativo. Nenhum upload sera executado."));
     files.forEach((filePath) => console.log(`- ${filePath}`));
     return;
   }
 
   await uploadFiles(config, files);
-  console.log("Deploy finalizado com sucesso.");
+  console.log(paint(colors.green, "Deploy finalizado com sucesso."));
 }
 
 main().catch((error) => {

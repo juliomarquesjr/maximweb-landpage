@@ -123,6 +123,7 @@ Sempre execute `npm run build` antes de finalizar qualquer tarefa. Deve terminar
 - Script oficial: `npm run deploy:cpanel` (build estático + upload FTP/FTPS)
 - Variáveis necessárias: `CPANEL_FTP_SERVER`, `CPANEL_FTP_USERNAME`, `CPANEL_FTP_PASSWORD`, `CPANEL_FTP_SERVER_DIR`
 - `CPANEL_FTP_CONCURRENCY` opcional, com máximo de `2`
+- Upload só inicia após todos os workers conectarem; em TTY há barra de progresso e logs coloridos
 - O script ignora `contact.config.local.php` por segurança
 
 ## Manutenção de documentação

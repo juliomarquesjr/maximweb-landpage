@@ -120,6 +120,7 @@ public/brand/            → assets estaticos de marca otimizados
 - Comando: `npm run deploy:cpanel` (build `out/` + upload FTP/FTPS)
 - Variáveis: `CPANEL_FTP_SERVER`, `CPANEL_FTP_USERNAME`, `CPANEL_FTP_PASSWORD`, `CPANEL_FTP_SERVER_DIR`
 - `CPANEL_FTP_CONCURRENCY` opcional, com limite máximo de `2`
+- Upload inicia somente após todos os workers conectarem; em terminal interativo exibe barra de progresso e logs coloridos
 - Segurança: `contact.config.local.php` deve permanecer apenas no servidor
 
 ---

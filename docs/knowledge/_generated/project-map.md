@@ -70,9 +70,10 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [adr/003-sem-imagens-externas.md](../../../adr/003-sem-imagens-externas.md) | ADR 003 — Design sem imagens externas | `54d3cc97f9075c9d` |
 | [adr/004-server-client-boundary.md](../../../adr/004-server-client-boundary.md) | ADR 004 — Estratégia Client/Server Component boundary | `05706031657cdb47` |
 | [adr/005-formulario-contato-php-resend.md](../../../adr/005-formulario-contato-php-resend.md) | ADR 005 — Formulário de contato via PHP (cPanel) + Resend | `a3d349e134e61e99` |
-| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `39e1151adbc10217` |
+| [adr/006-deploy-local-cpanel-ftp.md](../../../adr/006-deploy-local-cpanel-ftp.md) | ADR 006 — Deploy local para cPanel via FTP/FTPS | `2e9860c9537de685` |
+| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `87a95c82273711eb` |
 | [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `5ff826999649f994` |
-| [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `a786a59c6b000667` |
+| [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `93c3647601bebac0` |
 | [docs/DESIGN_TOKENS.md](../../DESIGN_TOKENS.md) | Design Tokens — MaximWeb Landing Page | `7edfebf1cf038af2` |
 | [docs/multiagentes/checklist.md](../../multiagentes/checklist.md) | Checklist de Validacao — Landing Page | `feb3e6c272c1a37c` |
 | [docs/multiagentes/README.md](../../multiagentes/README.md) | Playbook de Multiagentes — MaximWeb | `82f46c02f148efdb` |
@@ -83,4 +84,4 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [docs/multiagentes/templates/qa-performance.md](../../multiagentes/templates/qa-performance.md) | Prompt — QA/Performance | `1a71063d1187d31f` |
 | [docs/multiagentes/templates/ui-engineer.md](../../multiagentes/templates/ui-engineer.md) | Prompt — UI Engineer | `d0ccf2479a2e800b` |
 | [package.json](../../../package.json) | package.json | `788083332e58abfc` |
-| [README.md](../../../README.md) | MaximWeb — Landing Page | `c79f66b11fbe2818` |
+| [README.md](../../../README.md) | MaximWeb — Landing Page | `567f326f7abe1b67` |

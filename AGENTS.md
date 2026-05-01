@@ -197,6 +197,7 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 13. **Contato em produção (cPanel)** — `ContactForm` chama `/contact.php`; segredos só em `contact.config.local.php` (não versionar). Não reintroduzir `src/app/api/contact` para o deploy estático descrito no README.
 14. **Deploy local para cPanel** — o script `scripts/deploy-cpanel.mjs` depende de `CPANEL_FTP_*` no ambiente; ele envia `out/` via FTP/FTPS e ignora `contact.config.local.php` para não sobrescrever segredos em produção.
 15. **Concorrência de upload no cPanel** — `CPANEL_FTP_CONCURRENCY` controla uploads simultâneos no script local, com limite máximo de `2` para compatibilidade com hospedagem compartilhada.
+16. **UX do terminal no deploy local** — em terminal interativo, o script mostra status de conexão, barra de progresso colorida e só inicia uploads após todos os workers conectarem; em ambiente não interativo, faz fallback para logs lineares.
 
 ---
 

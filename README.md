@@ -218,6 +218,9 @@ Para validar sem enviar ficheiros:
 - `npm run deploy:cpanel:dry-run`
 
 O script envia os arquivos de `out/`, inclui `contact.php` e `contact.config.example.php`, e ignora `contact.config.local.php` para não sobrescrever segredos no servidor.
+No modo interativo, exibe status de conexão e barra de progresso colorida; o upload só começa depois que todos os workers configurados conectam.
+
+Decisão arquitetural: [adr/006-deploy-local-cpanel-ftp.md](adr/006-deploy-local-cpanel-ftp.md).
 
 ### Vercel / Node
 

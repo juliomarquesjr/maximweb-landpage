@@ -21,7 +21,7 @@ This page is a generated operational summary for AI agents working on this proje
 | Source | Title | SHA-256 |
 |---|---|---|
 | [.github/copilot-instructions.md](../../../.github/copilot-instructions.md) | GitHub Copilot Instructions — MaximWeb Landing Page | `c15114eea0ce7fee` |
-| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `39e1151adbc10217` |
+| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `87a95c82273711eb` |
 | [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `5ff826999649f994` |
 | [docs/multiagentes/checklist.md](../../multiagentes/checklist.md) | Checklist de Validacao — Landing Page | `feb3e6c272c1a37c` |
 | [docs/multiagentes/README.md](../../multiagentes/README.md) | Playbook de Multiagentes — MaximWeb | `82f46c02f148efdb` |
