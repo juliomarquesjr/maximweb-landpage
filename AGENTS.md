@@ -59,9 +59,11 @@ src/
                           (useScroll → scaleX on motion.div); AnimatePresence mobile menu
       Footer.tsx        — server component (no 'use client')
     sections/
-      Hero.tsx          — full-viewport; hero-grid bg with parallax (useScroll+useTransform
-                          on backgroundPositionY); floating ambient orbs (animate-float);
-                          radial glow; stagger animation; CountUp stats (50+, 99%); magnetic CTA
+      Hero.tsx          — full-viewport responsive text + DigitalBuildScene visual;
+                          hero-grid bg with parallax (useScroll+useTransform on
+                          backgroundPositionY); floating ambient orbs (animate-float);
+                          radial glow; stagger animation; CountUp stats (50+, 99%);
+                          magnetic CTA
       Services.tsx      — 3 GlowCards; AnimatedHeading title
       Products.tsx      — 4 GlowCards with per-card glow colors; AnimatedHeading title
       Differentials.tsx — 4 cards (bg-bg-card + gradient-border-card top-accent hover);
@@ -112,7 +114,7 @@ src/
 - **Section entry**: `SectionWrapper` with `useInView`. Children use `variants={itemVariants}` imported from `SectionWrapper.tsx`.
 - **Hover cards (GlowCard)**: `whileHover={{ scale: 1.02 }}` + 3D tilt via `useMotionValue`/`useSpring`/`useTransform`. Reset on `onMouseLeave`.
 - **Hover cards (Differentials)**: `whileHover={{ y: -6 }}` + `.gradient-border-card` top accent.
-- **Hero**: standalone `containerVariants` + `itemVariants` defined locally (not from SectionWrapper). Parallax on `motion.section` via `useScroll`+`useTransform`.
+- **Hero**: standalone `containerVariants` + `itemVariants` defined locally (not from SectionWrapper). Parallax on `motion.section` via `useScroll`+`useTransform`. `DigitalBuildScene` stays inside `Hero.tsx` and uses Framer Motion keyframes for the crane, build blocks, conveyor, terminal pulse, and cursor motion.
 - **Floating orbs**: `animate-float` with different `animationDelay` per orb for offset rhythm.
 - **Section headings**: `AnimatedHeading` component — word-by-word blur+fade, fires once on viewport entry. Use `highlightWords` prop to apply `gradient-text` to specific words.
 - **Animated stats**: `CountUp` component — animates 0→N using `useMotionValue`+`animate`. Non-numeric values (e.g. "24/7") must be rendered as static strings.

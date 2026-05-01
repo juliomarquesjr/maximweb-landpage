@@ -83,7 +83,7 @@ import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 </SectionWrapper>
 ```
 
-**Hero** usa animações locais próprias (não usa SectionWrapper).
+**Hero** usa animações locais próprias (não usa SectionWrapper), incluindo `DigitalBuildScene` dentro de `Hero.tsx` para a cena de construção digital com guindaste, blocos, esteira, terminal e cursor em movimento.
 
 ---
 

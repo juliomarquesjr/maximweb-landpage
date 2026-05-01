@@ -94,7 +94,7 @@ Navbar → Hero → TechMarquee → [section-divider] → Services → Products 
 - **Entrada de seção**: `<SectionWrapper>` + filhos com `variants={itemVariants}`
 - **GlowCard hover**: `whileHover={{ scale: 1.02 }}` + tilt 3D via `useMotionValue`/`useSpring`
 - **Differentials hover**: `whileHover={{ y: -6 }}` + `.gradient-border-card`
-- **Hero**: parallax no grid via `useScroll` + `useTransform` → `backgroundPositionY`; floating orbs com `animate-float` e delays escalonados; CountUp nos stats numéricos
+- **Hero**: parallax no grid via `useScroll` + `useTransform` → `backgroundPositionY`; floating orbs com `animate-float` e delays escalonados; `DigitalBuildScene` local com guindaste, blocos, esteira, terminal e cursor animados; CountUp nos stats numéricos
 - **Títulos de seção**: `<AnimatedHeading>` com `highlightWords` para palavras em gradiente
 - **Scroll progress**: `Navbar.tsx` — `useScroll()` → `scrollYProgress` → `motion.div scaleX`
 - **Botões magnéticos**: `<Button magnetic>` apenas no Hero e CTA section
