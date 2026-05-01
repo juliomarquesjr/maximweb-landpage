@@ -162,6 +162,14 @@ handleSubmit → validate() → fetch('/contact.php') → PHP valida → cURL Re
 
 ---
 
+## Deploy para cPanel
+
+- Deploy local: `npm run deploy:cpanel` usa `scripts/deploy-cpanel.mjs` para enviar `out/` ao cPanel.
+- O deploy local suporta `CPANEL_FTP_CONCURRENCY` (máximo `2`) para upload simultâneo em hosts compartilhados.
+- Segurança: o deploy local ignora `contact.config.local.php`, mantendo o segredo somente no servidor.
+
+---
+
 ## Convenções de nomenclatura
 
 | Tipo | Padrão | Exemplo |

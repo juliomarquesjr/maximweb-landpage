@@ -40,6 +40,9 @@ public/
   contact.php                  — POST JSON (nome, email, telefone, mensagem); valida; cURL → Resend;
                                  secrets em contact.config.local.php (gitignored; ver contact.config.example.php)
   contact.config.example.php   — template de config para cPanel
+scripts/
+  deploy-cpanel.mjs            — deploy local via FTP/FTPS (upload de `out/` para cPanel; ignora `contact.config.local.php`)
+  sync-obsidian.mjs            — sincroniza arquivos gerados do vault `docs/knowledge/_generated`
 src/
   app/
     layout.tsx          — Inter font, suppressHydrationWarning on <html>, metadata pt-BR
@@ -139,6 +142,9 @@ src/
 ```bash
 npm run dev     # starts at http://localhost:3000
 npm run build   # must pass with 0 TypeScript errors before any PR
+npm run build:static  # static export build to out/
+npm run deploy:cpanel  # local static build + FTP/FTPS upload to cPanel
+npm run deploy:cpanel:dry-run  # preview files without uploading
 npm run knowledge:sync   # regenerates docs/knowledge/_generated
 npm run knowledge:check  # verifies generated knowledge is current
 ```
@@ -189,6 +195,8 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 11. **Brand logo performance** — keep the header logo in `public/brand/maximweb-logo.png`, optimized for the dark header. Render it with `next/image`, explicit intrinsic `width`/`height`, and a fixed `sizes` value to avoid layout shift.
 12. **Keep the Obsidian vault current** — run `npm run knowledge:sync` after updating structural docs, ADRs, agent rules, or technical patterns.
 13. **Contato em produção (cPanel)** — `ContactForm` chama `/contact.php`; segredos só em `contact.config.local.php` (não versionar). Não reintroduzir `src/app/api/contact` para o deploy estático descrito no README.
+14. **Deploy local para cPanel** — o script `scripts/deploy-cpanel.mjs` depende de `CPANEL_FTP_*` no ambiente; ele envia `out/` via FTP/FTPS e ignora `contact.config.local.php` para não sobrescrever segredos em produção.
+15. **Concorrência de upload no cPanel** — `CPANEL_FTP_CONCURRENCY` controla uploads simultâneos no script local, com limite máximo de `2` para compatibilidade com hospedagem compartilhada.
 
 ---
 

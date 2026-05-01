@@ -87,6 +87,7 @@ Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 ·
 
 ```
 public/contact.php       → POST do formulário → Resend (config PHP local)
+scripts/deploy-cpanel.mjs → deploy local FTP/FTPS do `out/` para cPanel
 src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
 src/components/layout/   → Navbar (client, logo otimizado, scroll progress bar), Footer (server)
 src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm
@@ -116,6 +117,13 @@ Navbar → Hero → TechMarquee → [section-divider] → Services → Products 
 ## Verificação obrigatória
 
 Sempre execute `npm run build` antes de finalizar qualquer tarefa. Deve terminar com 0 erros TypeScript.
+
+## Deploy local
+
+- Script oficial: `npm run deploy:cpanel` (build estático + upload FTP/FTPS)
+- Variáveis necessárias: `CPANEL_FTP_SERVER`, `CPANEL_FTP_USERNAME`, `CPANEL_FTP_PASSWORD`, `CPANEL_FTP_SERVER_DIR`
+- `CPANEL_FTP_CONCURRENCY` opcional, com máximo de `2`
+- O script ignora `contact.config.local.php` por segurança
 
 ## Manutenção de documentação
 

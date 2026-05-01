@@ -20,6 +20,8 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | `npm run dev` | `next dev` |
 | `npm run build` | `next build` |
 | `npm run build:static` | `cross-env NEXT_STATIC_EXPORT=1 next build` |
+| `npm run deploy:cpanel` | `npm run build:static && node scripts/deploy-cpanel.mjs` |
+| `npm run deploy:cpanel:dry-run` | `npm run build:static && cross-env CPANEL_FTP_DRY_RUN=1 node scripts/deploy-cpanel.mjs` |
 | `npm run start` | `next start` |
 | `npm run lint` | `eslint` |
 | `npm run knowledge:sync` | `node scripts/sync-obsidian.mjs sync` |
@@ -68,9 +70,9 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [adr/003-sem-imagens-externas.md](../../../adr/003-sem-imagens-externas.md) | ADR 003 — Design sem imagens externas | `54d3cc97f9075c9d` |
 | [adr/004-server-client-boundary.md](../../../adr/004-server-client-boundary.md) | ADR 004 — Estratégia Client/Server Component boundary | `05706031657cdb47` |
 | [adr/005-formulario-contato-php-resend.md](../../../adr/005-formulario-contato-php-resend.md) | ADR 005 — Formulário de contato via PHP (cPanel) + Resend | `a3d349e134e61e99` |
-| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `9d4add661ec03ecd` |
+| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `39e1151adbc10217` |
 | [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `5ff826999649f994` |
-| [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `d620f83b27a3b6da` |
+| [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `a786a59c6b000667` |
 | [docs/DESIGN_TOKENS.md](../../DESIGN_TOKENS.md) | Design Tokens — MaximWeb Landing Page | `7edfebf1cf038af2` |
 | [docs/multiagentes/checklist.md](../../multiagentes/checklist.md) | Checklist de Validacao — Landing Page | `feb3e6c272c1a37c` |
 | [docs/multiagentes/README.md](../../multiagentes/README.md) | Playbook de Multiagentes — MaximWeb | `82f46c02f148efdb` |
@@ -80,5 +82,5 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [docs/multiagentes/templates/prompt-base.md](../../multiagentes/templates/prompt-base.md) | Prompt Base para Multiagentes | `be03197b41f371f3` |
 | [docs/multiagentes/templates/qa-performance.md](../../multiagentes/templates/qa-performance.md) | Prompt — QA/Performance | `1a71063d1187d31f` |
 | [docs/multiagentes/templates/ui-engineer.md](../../multiagentes/templates/ui-engineer.md) | Prompt — UI Engineer | `d0ccf2479a2e800b` |
-| [package.json](../../../package.json) | package.json | `cb9a2ffdebd4bfb9` |
-| [README.md](../../../README.md) | MaximWeb — Landing Page | `e83b5b3d86787419` |
+| [package.json](../../../package.json) | package.json | `788083332e58abfc` |
+| [README.md](../../../README.md) | MaximWeb — Landing Page | `c79f66b11fbe2818` |

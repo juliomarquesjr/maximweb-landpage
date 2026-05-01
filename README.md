@@ -61,6 +61,9 @@ Decisão arquitetural: [adr/005-formulario-contato-php-resend.md](adr/005-formul
 |---|---|
 | `npm run dev` | Servidor de desenvolvimento com Turbopack (hot reload) |
 | `npm run build` | Build de produção |
+| `npm run build:static` | Build estático para export em `out/` |
+| `npm run deploy:cpanel` | Build estático + upload local para cPanel via FTP/FTPS |
+| `npm run deploy:cpanel:dry-run` | Simula o deploy local e lista os arquivos sem enviar |
 | `npm run start` | Inicia o servidor de produção (após build) |
 | `npm run lint` | Executa ESLint |
 | `npm run knowledge:sync` | Regenera os indices do vault Obsidian em `docs/knowledge/_generated` |
@@ -196,24 +199,25 @@ O projeto inclui o [Playwright MCP](https://github.com/microsoft/playwright-mcp)
 2. Envie para a raiz pública (`public_html` ou subpasta do domínio) o HTML/JS/CSS do Next **e** os ficheiros `contact.php`, `contact.config.example.php` e a cópia preenchida `contact.config.local.php`.
 3. Confirme que a extensão PHP está ativa e que **cURL** está habilitado.
 
-### CI/CD automático (GitHub Actions + cPanel FTP)
+### Deploy local via script (`npm run`)
 
-Este repositório já inclui o workflow `.github/workflows/deploy-cpanel.yml` para build e deploy automático em hospedagem cPanel, sem plano pago.
+Para publicar localmente, use:
 
-Fluxo:
-1. Push na `main` (ou execução manual em *Actions*).
-2. CI roda `npm ci` e `npm run build:static` (gera `out/`).
-3. Deploy via FTP/FTPS para o diretório público do cPanel.
-4. O arquivo `contact.config.local.php` no servidor não é sobrescrito.
+1. Defina variáveis de ambiente no `.env` ou `.env.local` (sem versionar), ou exporte no terminal:
+   - `CPANEL_FTP_SERVER`
+   - `CPANEL_FTP_USERNAME`
+   - `CPANEL_FTP_PASSWORD`
+   - `CPANEL_FTP_SERVER_DIR` (ex.: `/public_html/`)
+   - `CPANEL_FTP_PORT` (opcional, padrão `21`)
+   - `CPANEL_FTP_SECURE` (opcional, padrão `true`)
+   - `CPANEL_FTP_CONCURRENCY` (opcional, padrão `1`, máximo `2`)
+2. Execute:
+   - `npm run deploy:cpanel`
 
-Configure os **GitHub Secrets** no repositório:
-- `CPANEL_FTP_SERVER` (ex.: `ftp.seudominio.com`)
-- `CPANEL_FTP_USERNAME`
-- `CPANEL_FTP_PASSWORD`
-- `CPANEL_FTP_SERVER_DIR` (ex.: `/public_html/`)
-- `CPANEL_FTP_PORT` (opcional; padrão `21`)
+Para validar sem enviar ficheiros:
+- `npm run deploy:cpanel:dry-run`
 
-> Recomendado: habilite FTPS no cPanel e use credenciais com acesso restrito somente ao diretório de deploy.
+O script envia os arquivos de `out/`, inclui `contact.php` e `contact.config.example.php`, e ignora `contact.config.local.php` para não sobrescrever segredos no servidor.
 
 ### Vercel / Node
 

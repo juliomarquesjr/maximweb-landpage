@@ -102,6 +102,7 @@ import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 
 ```
 public/contact.php       → formulário → Resend (cPanel)
+scripts/deploy-cpanel.mjs → deploy local FTP/FTPS para cPanel
 src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
 src/components/layout/   → Navbar (client, logo otimizado), Footer (server)
 src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm
@@ -111,6 +112,15 @@ public/brand/            → assets estaticos de marca otimizados
 ```
 
 **Ordem em `page.tsx`:** Navbar → Hero → TechMarquee → Services → Products → Differentials → CTA → ContactForm → Footer
+
+---
+
+## Deploy local (fallback)
+
+- Comando: `npm run deploy:cpanel` (build `out/` + upload FTP/FTPS)
+- Variáveis: `CPANEL_FTP_SERVER`, `CPANEL_FTP_USERNAME`, `CPANEL_FTP_PASSWORD`, `CPANEL_FTP_SERVER_DIR`
+- `CPANEL_FTP_CONCURRENCY` opcional, com limite máximo de `2`
+- Segurança: `contact.config.local.php` deve permanecer apenas no servidor
 
 ---
 
