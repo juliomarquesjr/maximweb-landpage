@@ -71,6 +71,11 @@ Next.js 16 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer
 ### `TechMarquee.tsx`
 - Server component puro — sem `'use client'`, sem hooks
 
+### `Navbar.tsx`
+- Client component com scroll progress bar (`useScroll`) e menu mobile (`AnimatePresence`)
+- Logo oficial em `public/brand/maximweb-logo.png`
+- Renderizar o logo com `next/image`, `width`/`height` explicitos e `sizes` fixo para evitar layout shift
+
 ---
 
 ## Padrão de animação de seções
@@ -85,16 +90,19 @@ import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 
 **Hero** usa animações locais próprias (não usa SectionWrapper), incluindo `DigitalBuildScene` dentro de `Hero.tsx` para a cena de construção digital com guindaste, blocos, esteira, terminal e cursor em movimento.
 
+**Services** usa `SectionWrapper` e `GlowCard`s com mini cenas animadas por serviço: montagem de interface, fluxo automatizado e módulos sob medida.
+
 ---
 
 ## Estrutura
 
 ```
 src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
-src/components/layout/   → Navbar (client), Footer (server)
+src/components/layout/   → Navbar (client, logo otimizado), Footer (server)
 src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm
 src/app/globals.css      → @theme + keyframes + classes utilitárias
 src/lib/utils.ts         → cn()
+public/brand/            → assets estaticos de marca otimizados
 ```
 
 **Ordem em `page.tsx`:** Navbar → Hero → TechMarquee → Services → Products → Differentials → CTA → ContactForm → Footer
