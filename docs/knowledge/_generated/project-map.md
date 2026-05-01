@@ -66,7 +66,7 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [adr/002-framer-motion-scroll-reveal.md](../../../adr/002-framer-motion-scroll-reveal.md) | ADR 002 — Framer Motion para scroll reveal via SectionWrapper | `2c8f06b6cbfb446c` |
 | [adr/003-sem-imagens-externas.md](../../../adr/003-sem-imagens-externas.md) | ADR 003 — Design sem imagens externas | `e47582c901665529` |
 | [adr/004-server-client-boundary.md](../../../adr/004-server-client-boundary.md) | ADR 004 — Estratégia Client/Server Component boundary | `05706031657cdb47` |
-| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `2987864841ab94e3` |
+| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `4ed1d25569c816f6` |
 | [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `c6a5c399b26da638` |
 | [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `97675d8df7bd0b84` |
 | [docs/DESIGN_TOKENS.md](../../DESIGN_TOKENS.md) | Design Tokens — MaximWeb Landing Page | `7edfebf1cf038af2` |
@@ -79,4 +79,4 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [docs/multiagentes/templates/qa-performance.md](../../multiagentes/templates/qa-performance.md) | Prompt — QA/Performance | `1a71063d1187d31f` |
 | [docs/multiagentes/templates/ui-engineer.md](../../multiagentes/templates/ui-engineer.md) | Prompt — UI Engineer | `d0ccf2479a2e800b` |
 | [package.json](../../../package.json) | package.json | `2927eaef74e99593` |
-| [README.md](../../../README.md) | MaximWeb — Landing Page | `062e717b08d10652` |
+| [README.md](../../../README.md) | MaximWeb — Landing Page | `abe6bc666784bc46` |
