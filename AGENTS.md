@@ -35,6 +35,8 @@ Use generic substitutes: `GitBranch`, `Link`, `Camera`, etc.
 
 ```
 public/
+  brand/
+    maximweb-logo.png          — logo transparente otimizado para o header escuro (next/image)
   contact.php                  — POST JSON (nome, email, telefone, mensagem); valida; cURL → Resend;
                                  secrets em contact.config.local.php (gitignored; ver contact.config.example.php)
   contact.config.example.php   — template de config para cPanel
@@ -60,13 +62,18 @@ src/
       TechMarquee.tsx    — infinite CSS marquee of tech stack badges; SERVER component (no 'use client')
     layout/
       Navbar.tsx        — transparent → glass on scroll >24px; scroll progress bar at top
-                          (useScroll → scaleX on motion.div); AnimatePresence mobile menu
+                          (useScroll → scaleX on motion.div); optimized brand logo via
+                          next/image; AnimatePresence mobile menu
       Footer.tsx        — server component (no 'use client')
     sections/
-      Hero.tsx          — full-viewport; hero-grid bg with parallax (useScroll+useTransform
-                          on backgroundPositionY); floating ambient orbs (animate-float);
-                          radial glow; stagger animation; CountUp stats (50+, 99%); magnetic CTA
-      Services.tsx      — 3 GlowCards; AnimatedHeading title
+      Hero.tsx          — full-viewport responsive text + DigitalBuildScene visual;
+                          hero-grid bg with parallax (useScroll+useTransform on
+                          backgroundPositionY); floating ambient orbs (animate-float);
+                          radial glow; stagger animation; CountUp stats (50+, 99%);
+                          magnetic CTA
+      Services.tsx      — AnimatedHeading title; 3 enriched GlowCards with
+                          service-specific mini scenes, badges, feature lists,
+                          and per-card glow colors
       Products.tsx      — 4 GlowCards with per-card glow colors; AnimatedHeading title
       Differentials.tsx — 4 cards (bg-bg-card + gradient-border-card top-accent hover);
                           whileHover y:-6; AnimatedHeading title
@@ -116,7 +123,8 @@ src/
 - **Section entry**: `SectionWrapper` with `useInView`. Children use `variants={itemVariants}` imported from `SectionWrapper.tsx`.
 - **Hover cards (GlowCard)**: `whileHover={{ scale: 1.02 }}` + 3D tilt via `useMotionValue`/`useSpring`/`useTransform`. Reset on `onMouseLeave`.
 - **Hover cards (Differentials)**: `whileHover={{ y: -6 }}` + `.gradient-border-card` top accent.
-- **Hero**: standalone `containerVariants` + `itemVariants` defined locally (not from SectionWrapper). Parallax on `motion.section` via `useScroll`+`useTransform`.
+- **Hero**: standalone `containerVariants` + `itemVariants` defined locally (not from SectionWrapper). Parallax on `motion.section` via `useScroll`+`useTransform`. `DigitalBuildScene` stays inside `Hero.tsx` and uses Framer Motion keyframes for the crane, build blocks, conveyor, terminal pulse, and cursor motion.
+- **Services**: use `SectionWrapper` for entry and service-specific mini scenes inside each `GlowCard`. The current scenes are system UI assembly, automation flow, and custom module composition.
 - **Floating orbs**: `animate-float` with different `animationDelay` per orb for offset rhythm.
 - **Section headings**: `AnimatedHeading` component — word-by-word blur+fade, fires once on viewport entry. Use `highlightWords` prop to apply `gradient-text` to specific words.
 - **Animated stats**: `CountUp` component — animates 0→N using `useMotionValue`+`animate`. Non-numeric values (e.g. "24/7") must be rendered as static strings.
@@ -178,8 +186,9 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 8. **CountUp `animate` overload** — use `animate(motionValue, target, options)` (MotionValue first argument), not `animate(fromNumber, toNumber, options)`. The latter has TypeScript overload issues in Framer Motion v12.
 9. **`AnimatedHeading` fires independently** — it uses its own `useInView`, not the parent `SectionWrapper` stagger. Place it inside a `motion.div variants={itemVariants}` wrapper only if you want the surrounding block (label + subtitle) to stagger together. The heading itself always animates word-by-word on its own.
 10. **`gradient-border-card` is CSS-only** — it uses a `::before` pseudo-element (top accent line). It does NOT use `isolation: isolate` or negative z-index. Safe to combine with any Framer Motion `motion.div`.
-11. **Keep the Obsidian vault current** — run `npm run knowledge:sync` after updating structural docs, ADRs, agent rules, or technical patterns.
-12. **Contato em produção (cPanel)** — `ContactForm` chama `/contact.php`; segredos só em `contact.config.local.php` (não versionar). Não reintroduzir `src/app/api/contact` para o deploy estático descrito no README.
+11. **Brand logo performance** — keep the header logo in `public/brand/maximweb-logo.png`, optimized for the dark header. Render it with `next/image`, explicit intrinsic `width`/`height`, and a fixed `sizes` value to avoid layout shift.
+12. **Keep the Obsidian vault current** — run `npm run knowledge:sync` after updating structural docs, ADRs, agent rules, or technical patterns.
+13. **Contato em produção (cPanel)** — `ContactForm` chama `/contact.php`; segredos só em `contact.config.local.php` (não versionar). Não reintroduzir `src/app/api/contact` para o deploy estático descrito no README.
 
 ---
 

@@ -57,6 +57,11 @@ Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 ·
 - Server component (sem `'use client'`)
 - CSS `animate-marquee` para scroll infinito
 
+### Navbar (`src/components/layout/Navbar.tsx`)
+- Client component com scroll progress bar (`useScroll`) e menu mobile (`AnimatePresence`)
+- Logo oficial em `public/brand/maximweb-logo.png`
+- Renderizar o logo com `next/image`, `width`/`height` explicitos e `sizes` fixo para evitar layout shift
+
 ### ContactForm (`src/components/sections/ContactForm.tsx`) + `public/contact.php`
 - Client: `fetch('/contact.php', { body: JSON.stringify(form) })`; estados `success` | `error` | `unavailable` (503)
 - Servidor (cPanel / PHP): `contact.php` valida, chama API Resend via cURL; segredos em `contact.config.local.php` (gitignored). Sem config → 503
@@ -83,10 +88,11 @@ Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 ·
 ```
 public/contact.php       → POST do formulário → Resend (config PHP local)
 src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
-src/components/layout/   → Navbar (client, scroll progress bar), Footer (server)
+src/components/layout/   → Navbar (client, logo otimizado, scroll progress bar), Footer (server)
 src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm
 src/lib/utils.ts         → cn()
 src/app/globals.css      → @theme + keyframes + classes utilitárias
+public/brand/            → assets estaticos de marca otimizados
 ```
 
 **Ordem das seções em `page.tsx`:**
@@ -98,8 +104,9 @@ Navbar → Hero → TechMarquee → [section-divider] → Services → Products 
 
 - **Entrada de seção**: `<SectionWrapper>` + filhos com `variants={itemVariants}`
 - **GlowCard hover**: `whileHover={{ scale: 1.02 }}` + tilt 3D via `useMotionValue`/`useSpring`
+- **Services**: usa `SectionWrapper` e `GlowCard`s com mini cenas animadas por serviço: montagem de interface, fluxo automatizado e módulos sob medida
 - **Differentials hover**: `whileHover={{ y: -6 }}` + `.gradient-border-card`
-- **Hero**: parallax no grid via `useScroll` + `useTransform` → `backgroundPositionY`; floating orbs com `animate-float` e delays escalonados; CountUp nos stats numéricos
+- **Hero**: parallax no grid via `useScroll` + `useTransform` → `backgroundPositionY`; floating orbs com `animate-float` e delays escalonados; `DigitalBuildScene` local com guindaste, blocos, esteira, terminal e cursor animados; CountUp nos stats numéricos
 - **Títulos de seção**: `<AnimatedHeading>` com `highlightWords` para palavras em gradiente
 - **Scroll progress**: `Navbar.tsx` — `useScroll()` → `scrollYProgress` → `motion.div scaleX`
 - **Botões magnéticos**: `<Button magnetic>` apenas no Hero e CTA section

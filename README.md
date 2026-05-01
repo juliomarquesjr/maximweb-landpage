@@ -75,7 +75,9 @@ maximweb-landpage/
 ├── .claude/
 │   └── settings.json          # Configuração do MCP Playwright (testes visuais)
 ├── adr/                       # Architecture Decision Records (ex.: 005 — contato PHP + Resend)
-├── public/                    # Assets estáticos + contact.php (formulário → Resend)
+├── public/                    # Assets estáticos, logo e formulário PHP (Resend / cPanel)
+│   ├── brand/
+│   │   └── maximweb-logo.png  # Logo otimizado para o header escuro
 │   ├── contact.php            # Handler PHP (cPanel); config em contact.config.local.php
 │   └── contact.config.example.php
 ├── src/
@@ -85,11 +87,11 @@ maximweb-landpage/
 │   │   └── page.tsx           # Página principal (composição das seções)
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Navbar.tsx     # Navbar fixa + scroll progress bar no topo
+│   │   │   ├── Navbar.tsx     # Navbar fixa + logo otimizado + scroll progress bar
 │   │   │   └── Footer.tsx     # Rodapé com links e ícones sociais (server component)
 │   │   ├── sections/
-│   │   │   ├── Hero.tsx       # Hero com parallax, floating orbs e stats animados
-│   │   │   ├── Services.tsx   # Serviços (3 GlowCards)
+│   │   │   ├── Hero.tsx       # Hero com parallax, cena de construção digital e stats animados
+│   │   │   ├── Services.tsx   # Serviços com mini cenas animadas nos GlowCards
 │   │   │   ├── Products.tsx   # Produtos (4 GlowCards com glows coloridos)
 │   │   │   ├── Differentials.tsx # Diferenciais (4 cards com top-accent hover)
 │   │   │   ├── CTA.tsx        # Call to action com botão pulsante e magnético
@@ -155,10 +157,10 @@ Fonte principal: **Inter** (via `next/font/google`)
 
 | Ordem | Componente | Background | Destaques |
 |---|---|---|---|
-| — | `Navbar.tsx` | Transparente → glass no scroll | Scroll progress bar |
-| 1 | `Hero.tsx` | `bg-main` + hero-grid + radial glow | Parallax, floating orbs, CountUp stats, botão magnético |
+| — | `Navbar.tsx` | Transparente → glass no scroll | Logo via `next/image`, scroll progress bar |
+| 1 | `Hero.tsx` | `bg-main` + hero-grid + radial glow | Parallax, floating orbs, cena de construção digital, CountUp stats, botão magnético |
 | 2 | `TechMarquee.tsx` | `bg-secondary/50` | Marquee infinito de tecnologias |
-| 3 | `Services.tsx` | `bg-main` | 3 GlowCards com 3D tilt |
+| 3 | `Services.tsx` | `bg-main` | 3 GlowCards com mini cenas animadas por serviço, badges e listas de recursos |
 | 4 | `Products.tsx` | `bg-secondary` | 4 GlowCards com glow colorido por card |
 | 5 | `Differentials.tsx` | `bg-main` | Top-accent hover, hover y:-6 |
 | 6 | `CTA.tsx` | `bg-secondary` | Botão magnético pulsante |

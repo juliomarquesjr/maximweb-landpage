@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence, useScroll } from 'framer-motion'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -55,14 +56,21 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group focus-ring rounded-lg">
-          <div className="w-8 h-8 rounded-lg bg-brand-primary flex items-center justify-center
-                          group-hover:shadow-[0_0_16px_rgba(59,130,246,0.6)] transition-shadow duration-300">
-            <Zap className="w-4 h-4 text-white" />
-          </div>
-          <span className="text-xl font-bold tracking-tight">
-            Maxim<span className="text-brand-glow">Web</span>
-          </span>
+        <a
+          href="#"
+          aria-label="MaximWeb - início"
+          className="flex h-10 items-center focus-ring rounded-lg"
+        >
+          <Image
+            src="/brand/maximweb-logo.png"
+            alt="MaximWeb"
+            width={250}
+            height={52}
+            sizes="154px"
+            loading="eager"
+            fetchPriority="high"
+            className="h-8 w-auto sm:h-9"
+          />
         </a>
 
         {/* Desktop Links */}
