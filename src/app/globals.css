@@ -16,6 +16,7 @@
   --animate-float:          float 4s ease-in-out infinite;
   --animate-gradient-shift: gradient-shift 4s ease infinite;
   --animate-fade-in-up:     fade-in-up 0.6s ease forwards;
+  --animate-marquee:        marquee 30s linear infinite;
 }
 
 /* ── Keyframes ─────────────────────────────────────────────── */
@@ -144,4 +145,60 @@
     rgba(59,130,246,0.4) 50%,
     transparent 100%
   );
+}
+
+/* ── Card Top-Accent Hover Line ────────────────────────────── */
+.gradient-border-card {
+  position: relative;
+}
+
+.gradient-border-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59,130,246,0.7) 30%,
+    rgba(129,140,248,0.9) 50%,
+    rgba(59,130,246,0.7) 70%,
+    transparent
+  );
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity 0.4s ease, left 0.4s ease, right 0.4s ease;
+}
+
+.gradient-border-card:hover::before {
+  opacity: 1;
+  left: 5%;
+  right: 5%;
+}
+
+/* ── Keyframe: marquee ─────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+
+/* ── Film Grain Overlay (static texture, no animation) ─────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 192px 192px;
+}
+
+/* ── Reduced Motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee { animation: none; }
+  .animate-float   { animation: none; }
 }

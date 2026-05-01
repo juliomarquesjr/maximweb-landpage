@@ -1,8 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import CountUp from '@/components/ui/CountUp'
 
 const containerVariants = {
   hidden: {},
@@ -14,12 +15,44 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] as const } },
 }
 
+const ORBS = [
+  { w: 500, h: 500, top: '10%',  left: '-5%',   color: 'rgba(59,130,246,0.12)',  delay: '0s',   blur: 80 },
+  { w: 350, h: 350, top: '60%',  right: '-8%',  color: 'rgba(129,140,248,0.10)', delay: '1.4s', blur: 60 },
+  { w: 280, h: 280, top: '30%',  right: '15%',  color: 'rgba(96,165,250,0.08)',  delay: '0.7s', blur: 50 },
+  { w: 200, h: 200, top: '75%',  left: '20%',   color: 'rgba(139,92,246,0.07)',  delay: '2.1s', blur: 40 },
+] as const
+
 const scrollTo = (hash: string) =>
   document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
 
 export default function Hero() {
+  const { scrollYProgress } = useScroll()
+  const bgY = useTransform(scrollYProgress, [0, 0.4], ['0%', '30%'])
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden hero-grid px-6 pt-16">
+    <motion.section
+      style={{ backgroundPositionY: bgY }}
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden hero-grid px-6 pt-16"
+    >
+
+      {/* Floating ambient orbs */}
+      {ORBS.map((orb, i) => (
+        <div
+          key={i}
+          aria-hidden
+          className="pointer-events-none absolute rounded-full animate-float"
+          style={{
+            width: orb.w,
+            height: orb.h,
+            top: orb.top,
+            left: 'left' in orb ? orb.left : undefined,
+            right: 'right' in orb ? orb.right : undefined,
+            background: `radial-gradient(circle, ${orb.color} 0%, transparent 70%)`,
+            filter: `blur(${orb.blur}px)`,
+            animationDelay: orb.delay,
+          }}
+        />
+      ))}
 
       {/* Radial glow — center */}
       <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center">
@@ -81,7 +114,7 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="primary" size="lg" onClick={() => scrollTo('#contact')}>
+          <Button variant="primary" size="lg" magnetic onClick={() => scrollTo('#contact')}>
             Solicitar Orçamento
             <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
@@ -95,14 +128,18 @@ export default function Hero() {
           variants={itemVariants}
           className="mt-10 sm:mt-16 grid grid-cols-3 gap-4 sm:gap-8 max-w-lg mx-auto"
         >
-          {[
-            { value: '50+', label: 'Projetos Entregues' },
-            { value: '99%', label: 'Satisfação' },
-            { value: '24/7', label: 'Suporte' },
-          ].map(({ value, label }) => (
-            <div key={label} className="text-center">
-              <div className="text-2xl sm:text-3xl font-bold gradient-text">{value}</div>
-              <div className="text-xs text-text-muted mt-1">{label}</div>
+          {([
+            { to: 50,   suffix: '+', label: 'Projetos Entregues' },
+            { to: 99,   suffix: '%', label: 'Satisfação' },
+            { to: null, display: '24/7', label: 'Suporte' },
+          ] as const).map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-2xl sm:text-3xl font-bold gradient-text">
+                {'to' in stat && stat.to !== null
+                  ? <CountUp to={stat.to} suffix={stat.suffix} />
+                  : stat.display}
+              </div>
+              <div className="text-xs text-text-muted mt-1">{stat.label}</div>
             </div>
           ))}
         </motion.div>
@@ -124,6 +161,6 @@ export default function Hero() {
           style={{ background: 'linear-gradient(to bottom, #3B82F6, transparent)' }}
         />
       </motion.div>
-    </section>
+    </motion.section>
   )
 }

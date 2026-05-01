@@ -4,6 +4,7 @@ import { ShoppingBag, Bus, UtensilsCrossed, Car } from 'lucide-react'
 import { motion } from 'framer-motion'
 import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 import GlowCard from '@/components/ui/GlowCard'
+import AnimatedHeading from '@/components/ui/AnimatedHeading'
 
 const PRODUCTS = [
   {
@@ -60,9 +61,11 @@ export default function Products() {
           <p className="text-brand-glow text-sm font-semibold uppercase tracking-widest mb-3">
             Portfólio
           </p>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-            Nossos <span className="gradient-text">Produtos</span>
-          </h2>
+          <AnimatedHeading
+            text="Nossos Produtos"
+            highlightWords={['Produtos']}
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4"
+          />
           <p className="text-text-muted text-lg max-w-xl mx-auto">
             Sistemas prontos e customizáveis para segmentos específicos do mercado.
           </p>

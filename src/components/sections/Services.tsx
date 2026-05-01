@@ -4,6 +4,7 @@ import { Code2, Bot, Puzzle } from 'lucide-react'
 import { motion } from 'framer-motion'
 import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 import GlowCard from '@/components/ui/GlowCard'
+import AnimatedHeading from '@/components/ui/AnimatedHeading'
 
 const SERVICES = [
   {
@@ -41,9 +42,11 @@ export default function Services() {
           <p className="text-brand-glow text-sm font-semibold uppercase tracking-widest mb-3">
             O que fazemos
           </p>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-            Nossos <span className="gradient-text">Serviços</span>
-          </h2>
+          <AnimatedHeading
+            text="Nossos Serviços"
+            highlightWords={['Serviços']}
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4"
+          />
           <p className="text-text-muted text-lg max-w-xl mx-auto">
             Soluções completas para levar seu negócio ao próximo nível.
           </p>

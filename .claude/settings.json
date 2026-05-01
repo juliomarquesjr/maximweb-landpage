@@ -5,5 +5,17 @@
       "args": ["@playwright/mcp@latest"],
       "env": {}
     }
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"Lembrete: se voce adicionou ou alterou componentes, props, CSS utilities, keyframes ou convencoes — atualize AGENTS.md, README.md, .cursorrules e .windsurfrules antes de encerrar. Todos os agentes (Codex, Cursor, Windsurf) dependem desses arquivos.\"}'"
+          }
+        ]
+      }
+    ]
   }
 }

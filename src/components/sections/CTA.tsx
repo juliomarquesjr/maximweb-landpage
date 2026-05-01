@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { ArrowRight, Rocket } from 'lucide-react'
+import AnimatedHeading from '@/components/ui/AnimatedHeading'
+import Button from '@/components/ui/Button'
 
 export default function CTA() {
   const scrollToContact = () =>
@@ -32,29 +34,27 @@ export default function CTA() {
           <Rocket className="w-7 h-7 text-brand-glow" />
         </div>
 
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
-          Pronto para{' '}
-          <span className="gradient-text">transformar</span>
-          <br />
-          seu negócio?
-        </h2>
+        <AnimatedHeading
+          text="Pronto para transformar seu negócio?"
+          highlightWords={['transformar']}
+          className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6"
+        />
 
         <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
           Vamos construir juntos a solução digital que sua empresa precisa.
           Entre em contato e receba uma proposta personalizada.
         </p>
 
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
+        <Button
+          variant="primary"
+          size="lg"
+          magnetic
           onClick={scrollToContact}
-          className="animate-glow-pulse btn-gradient text-white font-bold text-lg
-                     px-10 py-4 rounded-2xl inline-flex items-center gap-3
-                     shadow-[0_0_30px_rgba(59,130,246,0.4)]"
+          className="animate-glow-pulse shadow-[0_0_30px_rgba(59,130,246,0.4)] px-10 py-4 text-lg rounded-2xl gap-3"
         >
           Começar agora
           <ArrowRight className="w-5 h-5" />
-        </motion.button>
+        </Button>
       </motion.div>
     </section>
   )

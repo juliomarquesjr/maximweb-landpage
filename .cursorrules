@@ -1,39 +1,119 @@
 # MaximWeb Landing Page — Cursor Rules
 
 ## Stack
-- Next.js 16 + React 19 + TypeScript 5 + Tailwind CSS v4 + Framer Motion 12 + lucide-react v1
+Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 · lucide-react v1
+
+---
 
 ## Regras obrigatórias
 
 ### Tailwind v4
 - NÃO crie `tailwind.config.ts` — toda configuração vai em `src/app/globals.css` dentro de `@theme {}`
-- Tokens já definidos: `brand-primary`, `brand-glow`, `bg-main`, `bg-secondary`, `bg-card`, `border-subtle`, `text-muted`, `font-inter`
-- Animações: `animate-glow-pulse`, `animate-float`, `animate-gradient-shift`
-- Gradiente no Tailwind v4: `bg-linear-to-b` (NÃO `bg-gradient-to-b`). Para gradientes complexos, prefira `style={}`
+- Tokens: `brand-primary` (#3B82F6), `brand-glow` (#60A5FA), `bg-main` (#0B0B0F), `bg-secondary` (#111118), `bg-card` (#14142A), `border-subtle` (#272740), `text-muted` (#6B7280)
+- Animações: `animate-glow-pulse`, `animate-float`, `animate-gradient-shift`, `animate-fade-in-up`, `animate-marquee`
+- Gradiente v4: `bg-linear-to-b` (NÃO `bg-gradient-to-b`). Para gradientes complexos: `style={}`
 
 ### React / Next.js
 - Componentes com `useState`, `useEffect`, `useRef`, Framer Motion ou event handlers PRECISAM de `'use client'`
-- `Footer.tsx` e `layout.tsx` são Server Components intencionalmente — não adicione `'use client'`
+- Server Components (NÃO adicionar `'use client'`): `Footer.tsx`, `layout.tsx`, `TechMarquee.tsx`
 - Use `cn()` de `@/lib/utils` para classes condicionais
 
 ### lucide-react v1
 - Ícones de marca REMOVIDOS: `Github`, `Linkedin`, `Instagram`, `Twitter`, `Facebook`
-- Antes de usar qualquer ícone: `node -e "const l=require('lucide-react'); console.log(!!l.NomeDoIcone)"`
+- Antes de usar um ícone novo: `node -e "const l=require('lucide-react'); console.log(!!l.NomeDoIcone)"`
 
-### Animações
-- Entrada de seção: `<SectionWrapper>` + filhos com `variants={itemVariants}`
-- `itemVariants` vem de `@/components/ui/SectionWrapper` (não recriar)
-- Hero usa animações locais próprias
-- Hover: `scale(1.03)` em GlowCard | `y: -6` em cards diretos
+---
 
-## Estrutura
+## Componentes UI — props e gotchas
+
+### Button (`src/components/ui/Button.tsx`)
+- Variantes: `primary` | `secondary` | `ghost`
+- Props: `loading?: boolean`, `magnetic?: boolean`
+- Usa `motion.button` internamente. Interface usa `Omit<ButtonHTMLAttributes, 'onDrag'|'onDragEnd'|'onDragStart'|'onDragEnter'|'onDragLeave'|'onDragOver'|'onDrop'|'onAnimationStart'|'onAnimationEnd'|'onAnimationIteration'>` — obrigatório para evitar conflito de tipos com Framer Motion
+- `magnetic` só nos CTAs do Hero e CTA section. NÃO usar em forms ou Navbar
+
+### GlowCard (`src/components/ui/GlowCard.tsx`)
+- Props: `glowColor?: string`, `className?`
+- Efeito 3D tilt no mousemove via `useMotionValue` + `useSpring` + `useTransform`
+- `transformPerspective: 1000` no `style` do `motion.div` (não CSS `perspective` no pai)
+- Reset ao `onMouseLeave`
+
+### AnimatedHeading (`src/components/ui/AnimatedHeading.tsx`)
+- Props: `text: string`, `highlightWords?: string[]`, `className?`, `as?: 'h1'|'h2'|'h3'`
+- Anima palavra por palavra com blur+fade ao entrar no viewport (uma vez)
+- `highlightWords` aplica `gradient-text` nas palavras listadas
+- Usa `useInView` próprio — NÃO depende do `SectionWrapper` para disparar
+
+### CountUp (`src/components/ui/CountUp.tsx`)
+- Props: `to: number`, `suffix?`, `prefix?`, `duration?`
+- **GOTCHA CRÍTICO**: usar `animate(motionValue, target, options)` — NÃO `animate(number, number)`. Esse overload tem conflito no FM v12
+- Valores não-numéricos (ex: "24/7") devem ser strings estáticas no componente pai
+
+### SectionWrapper (`src/components/ui/SectionWrapper.tsx`)
+- Gerencia `useInView` + stagger. Exporta `itemVariants`
+- Filhos usam `<motion.div variants={itemVariants}>`
+
+### TechMarquee (`src/components/ui/TechMarquee.tsx`)
+- Server component (sem `'use client'`)
+- CSS `animate-marquee` para scroll infinito
+
+---
+
+## Classes CSS globais (`src/app/globals.css`)
+
+| Classe | Efeito |
+|---|---|
+| `.glass` | Glassmorphism: fundo semi-opaco + blur(12px) + borda sutil |
+| `.hero-grid` | Grid futurista de linhas azuis — usado com `backgroundPositionY` para parallax |
+| `.gradient-text` | Texto com gradiente azul→indigo |
+| `.btn-gradient` | Gradiente animado no botão |
+| `.dark-input` | Input escuro com glow azul no foco |
+| `.section-divider` | Linha divisória com gradiente azul central |
+| `.gradient-border-card` | Linha accent no topo do card que aparece e expande no hover (CSS `::before`, sem z-index negativo) |
+| `body::after` | Film grain estático (textura, sem animação) |
+
+---
+
+## Estrutura de componentes
+
 ```
-src/components/ui/       → Button, GlowCard, SectionWrapper
-src/components/layout/   → Navbar (client), Footer (server)
+src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
+src/components/layout/   → Navbar (client, scroll progress bar), Footer (server)
 src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm
 src/lib/utils.ts         → cn()
-src/app/globals.css      → @theme + keyframes + .glass .hero-grid etc.
+src/app/globals.css      → @theme + keyframes + classes utilitárias
 ```
 
+**Ordem das seções em `page.tsx`:**
+Navbar → Hero → TechMarquee → [section-divider] → Services → Products → Differentials → CTA → ContactForm → Footer
+
+---
+
+## Convenções de animação
+
+- **Entrada de seção**: `<SectionWrapper>` + filhos com `variants={itemVariants}`
+- **GlowCard hover**: `whileHover={{ scale: 1.02 }}` + tilt 3D via `useMotionValue`/`useSpring`
+- **Differentials hover**: `whileHover={{ y: -6 }}` + `.gradient-border-card`
+- **Hero**: parallax no grid via `useScroll` + `useTransform` → `backgroundPositionY`; floating orbs com `animate-float` e delays escalonados; CountUp nos stats numéricos
+- **Títulos de seção**: `<AnimatedHeading>` com `highlightWords` para palavras em gradiente
+- **Scroll progress**: `Navbar.tsx` — `useScroll()` → `scrollYProgress` → `motion.div scaleX`
+- **Botões magnéticos**: `<Button magnetic>` apenas no Hero e CTA section
+
+---
+
 ## Verificação obrigatória
+
 Sempre execute `npm run build` antes de finalizar qualquer tarefa. Deve terminar com 0 erros TypeScript.
+
+## Manutenção de documentação
+
+Se você adicionou ou alterou componentes, props, CSS utilities, keyframes ou convenções, atualize **todos** os arquivos abaixo antes de encerrar:
+
+| Arquivo | Agente |
+|---|---|
+| `AGENTS.md` | OpenAI Codex CLI + qualquer LLM |
+| `README.md` | Todos |
+| `.cursorrules` | Cursor (este arquivo) |
+| `.windsurfrules` | Windsurf |
+
+Consulte a seção "Documentation Sync Protocol" em `AGENTS.md` para saber exatamente o que atualizar em cada arquivo.

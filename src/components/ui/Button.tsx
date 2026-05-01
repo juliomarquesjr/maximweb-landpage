@@ -1,16 +1,58 @@
 'use client'
 
-import { forwardRef, ButtonHTMLAttributes } from 'react'
+import { forwardRef, useRef, ButtonHTMLAttributes } from 'react'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  | 'onDrag' | 'onDragEnd' | 'onDragStart' | 'onDragEnter' | 'onDragLeave' | 'onDragOver' | 'onDrop'
+  | 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration'
+> {
   variant?: 'primary' | 'secondary' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   loading?: boolean
+  magnetic?: boolean
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'primary', size = 'md', loading = false, className, children, disabled, ...props }, ref) => {
+  (
+    {
+      variant = 'primary',
+      size = 'md',
+      loading = false,
+      magnetic = false,
+      className,
+      children,
+      disabled,
+      onMouseMove,
+      onMouseLeave,
+      ...props
+    },
+    ref
+  ) => {
+    const innerRef = useRef<HTMLButtonElement>(null)
+
+    const x = useMotionValue(0)
+    const y = useMotionValue(0)
+    const springX = useSpring(x, { stiffness: 300, damping: 20 })
+    const springY = useSpring(y, { stiffness: 300, damping: 20 })
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+      if (magnetic && innerRef.current) {
+        const rect = innerRef.current.getBoundingClientRect()
+        x.set((e.clientX - (rect.left + rect.width / 2)) * 0.25)
+        y.set((e.clientY - (rect.top + rect.height / 2)) * 0.25)
+      }
+      onMouseMove?.(e)
+    }
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
+      x.set(0)
+      y.set(0)
+      onMouseLeave?.(e)
+    }
+
     const base =
       'relative inline-flex items-center justify-center font-semibold rounded-xl ' +
       'transition-all duration-200 focus-ring select-none overflow-hidden ' +
@@ -33,8 +75,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     return (
-      <button
-        ref={ref}
+      <motion.button
+        ref={(node) => {
+          innerRef.current = node
+          if (typeof ref === 'function') ref(node)
+          else if (ref) (ref as React.MutableRefObject<HTMLButtonElement | null>).current = node
+        }}
+        style={magnetic ? { x: springX, y: springY } : undefined}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         disabled={disabled || loading}
         className={cn(base, variants[variant], sizes[size], className)}
         {...props}
@@ -47,7 +96,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         <span className={cn('inline-flex items-center justify-center', loading && 'invisible')}>
           {children}
         </span>
-      </button>
+      </motion.button>
     )
   }
 )

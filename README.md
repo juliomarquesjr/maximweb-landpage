@@ -63,24 +63,27 @@ maximweb-landpage/
 ├── public/                    # Assets estáticos
 ├── src/
 │   ├── app/
-│   │   ├── globals.css        # Tailwind @theme + utilitários globais
+│   │   ├── globals.css        # Tailwind @theme + keyframes + utilitários globais
 │   │   ├── layout.tsx         # Root layout (fonte Inter, metadata)
 │   │   └── page.tsx           # Página principal (composição das seções)
 │   ├── components/
 │   │   ├── layout/
-│   │   │   ├── Navbar.tsx     # Navbar fixa com efeito glass no scroll
-│   │   │   └── Footer.tsx     # Rodapé com links e ícones sociais
+│   │   │   ├── Navbar.tsx     # Navbar fixa + scroll progress bar no topo
+│   │   │   └── Footer.tsx     # Rodapé com links e ícones sociais (server component)
 │   │   ├── sections/
-│   │   │   ├── Hero.tsx       # Seção principal com grid animado
-│   │   │   ├── Services.tsx   # Serviços (3 cards)
-│   │   │   ├── Products.tsx   # Produtos (4 cards com glows coloridos)
-│   │   │   ├── Differentials.tsx # Diferenciais (4 cards)
-│   │   │   ├── CTA.tsx        # Call to action com botão pulsante
-│   │   │   └── ContactForm.tsx # Formulário de contato com validação
+│   │   │   ├── Hero.tsx       # Hero com parallax, floating orbs e stats animados
+│   │   │   ├── Services.tsx   # Serviços (3 GlowCards)
+│   │   │   ├── Products.tsx   # Produtos (4 GlowCards com glows coloridos)
+│   │   │   ├── Differentials.tsx # Diferenciais (4 cards com top-accent hover)
+│   │   │   ├── CTA.tsx        # Call to action com botão pulsante e magnético
+│   │   │   └── ContactForm.tsx # Formulário de contato com validação client-side
 │   │   └── ui/
-│   │       ├── Button.tsx     # Componente de botão reutilizável
-│   │       ├── GlowCard.tsx   # Card glassmorphism com hover glow
-│   │       └── SectionWrapper.tsx # Wrapper com scroll reveal animation
+│   │       ├── Button.tsx     # Botão reutilizável; props: variant, size, loading, magnetic
+│   │       ├── GlowCard.tsx   # Card glassmorphism com 3D tilt e hover glow
+│   │       ├── SectionWrapper.tsx # Wrapper com scroll-reveal (useInView + stagger)
+│   │       ├── AnimatedHeading.tsx # Título com animação palavra por palavra
+│   │       ├── CountUp.tsx    # Número animado de 0→N ao entrar no viewport
+│   │       └── TechMarquee.tsx # Faixa infinita de tecnologias (server component)
 │   └── lib/
 │       └── utils.ts           # Função cn() para classes condicionais
 ├── AGENTS.md                  # Guia técnico para agentes de IA
@@ -115,6 +118,8 @@ maximweb-landpage/
 | `.btn-gradient` | Botão com gradiente animado |
 | `.dark-input` | Input escuro com glow azul no foco |
 | `.section-divider` | Linha divisória com gradiente azul central |
+| `.gradient-border-card` | Linha accent no topo do card que aparece e expande no hover |
+| `body::after` | Textura estática de film grain (SVG turbulence, decorativa) |
 
 ### Tipografia
 
@@ -131,16 +136,17 @@ Fonte principal: **Inter** (via `next/font/google`)
 
 ## Seções da página
 
-| Seção | Componente | Background |
-|---|---|---|
-| Navbar | `Navbar.tsx` | Transparente → glass no scroll |
-| Hero | `Hero.tsx` | `bg-main` + hero-grid + radial glow |
-| Serviços | `Services.tsx` | `bg-main` |
-| Produtos | `Products.tsx` | `bg-secondary` |
-| Diferenciais | `Differentials.tsx` | `bg-main` |
-| Call to Action | `CTA.tsx` | `bg-secondary` |
-| Contato | `ContactForm.tsx` | `bg-main` |
-| Footer | `Footer.tsx` | `bg-secondary` |
+| Ordem | Componente | Background | Destaques |
+|---|---|---|---|
+| — | `Navbar.tsx` | Transparente → glass no scroll | Scroll progress bar |
+| 1 | `Hero.tsx` | `bg-main` + hero-grid + radial glow | Parallax, floating orbs, CountUp stats, botão magnético |
+| 2 | `TechMarquee.tsx` | `bg-secondary/50` | Marquee infinito de tecnologias |
+| 3 | `Services.tsx` | `bg-main` | 3 GlowCards com 3D tilt |
+| 4 | `Products.tsx` | `bg-secondary` | 4 GlowCards com glow colorido por card |
+| 5 | `Differentials.tsx` | `bg-main` | Top-accent hover, hover y:-6 |
+| 6 | `CTA.tsx` | `bg-secondary` | Botão magnético pulsante |
+| 7 | `ContactForm.tsx` | `bg-main` | Validação client-side |
+| — | `Footer.tsx` | `bg-secondary` | Server component |
 
 ---
 

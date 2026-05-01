@@ -37,25 +37,38 @@ Use generic substitutes: `GitBranch`, `Link`, `Camera`, etc.
 src/
   app/
     layout.tsx          — Inter font, suppressHydrationWarning on <html>, metadata pt-BR
-    page.tsx            — assembles all sections in order
-    globals.css         — @theme tokens + keyframes + utility classes (.glass, .hero-grid, etc.)
+    page.tsx            — Navbar → Hero → TechMarquee → Services → Products →
+                          Differentials → CTA → ContactForm → Footer
+    globals.css         — @theme tokens + keyframes + utility classes
   lib/
     utils.ts            — cn() helper (clsx + tailwind-merge)
   components/
     ui/
-      Button.tsx        — variants: primary | secondary | ghost; prop: loading (shows spinner)
+      Button.tsx        — variants: primary|secondary|ghost; props: loading, magnetic
+                          Uses motion.button internally; magnetic prop adds spring attraction to cursor
       SectionWrapper.tsx — scroll-reveal via useInView; exports itemVariants for child stagger
-      GlowCard.tsx      — glassmorphism card with configurable hover glow color
+      GlowCard.tsx      — glassmorphism card; 3D tilt on mousemove (useMotionValue+useSpring);
+                          configurable glowColor; whileHover scale:1.02
+      AnimatedHeading.tsx — word-by-word blur+fade-in animation; props: text, highlightWords,
+                            className, as (h1|h2|h3); fires once via useInView
+      CountUp.tsx        — animates a number from 0→N on viewport entry; props: to, suffix,
+                           prefix, duration; uses useMotionValue + animate (MotionValue overload)
+      TechMarquee.tsx    — infinite CSS marquee of tech stack badges; SERVER component (no 'use client')
     layout/
-      Navbar.tsx        — transparent → glass on scroll >24px; AnimatePresence mobile menu
+      Navbar.tsx        — transparent → glass on scroll >24px; scroll progress bar at top
+                          (useScroll → scaleX on motion.div); AnimatePresence mobile menu
       Footer.tsx        — server component (no 'use client')
     sections/
-      Hero.tsx          — full-viewport, hero-grid bg, radial glow, stagger animation
-      Services.tsx      — 3 GlowCards (Dev, Automação, Soluções)
-      Products.tsx      — 4 GlowCards with per-card glow colors
-      Differentials.tsx — 4 cards with bg-bg-card + border-border-subtle, hover y:-6
-      CTA.tsx           — pulsing gradient button (animate-glow-pulse)
-      ContactForm.tsx   — client-side validation; setTimeout stub → replace with real endpoint
+      Hero.tsx          — full-viewport; hero-grid bg with parallax (useScroll+useTransform
+                          on backgroundPositionY); floating ambient orbs (animate-float);
+                          radial glow; stagger animation; CountUp stats (50+, 99%); magnetic CTA
+      Services.tsx      — 3 GlowCards; AnimatedHeading title
+      Products.tsx      — 4 GlowCards with per-card glow colors; AnimatedHeading title
+      Differentials.tsx — 4 cards (bg-bg-card + gradient-border-card top-accent hover);
+                          whileHover y:-6; AnimatedHeading title
+      CTA.tsx           — AnimatedHeading; magnetic primary Button; animate-glow-pulse
+      ContactForm.tsx   — client-side validation; setTimeout stub → replace with real endpoint;
+                          AnimatedHeading title
 ```
 
 ---
@@ -77,18 +90,35 @@ src/
 | Class | Purpose |
 |---|---|
 | `.glass` | `rgba(20,20,35,0.92)` bg + `backdrop-filter: blur(12px)` + `rgba(255,255,255,0.07)` border |
-| `.hero-grid` | CSS grid lines overlay (60px, blue tint) |
+| `.hero-grid` | CSS grid lines overlay (60px, blue tint) — also used for parallax via `backgroundPositionY` |
 | `.gradient-text` | Blue→indigo gradient on text using `background-clip: text` |
 | `.btn-gradient` | Animated gradient background (gradient-shift keyframe) |
 | `.dark-input` | Dark form inputs with blue glow on `:focus` |
 | `.section-divider` | 1px horizontal line with blue gradient center |
 | `.focus-ring` | Blue outline on `:focus-visible` |
+| `.gradient-border-card` | Top-edge accent line that appears + expands on hover (blue→indigo gradient) |
+| `body::after` | Static film grain texture overlay (SVG turbulence, `opacity: 0.022`) — no animation |
+
+### CSS Keyframes
+| Token / Name | Definition |
+|---|---|
+| `--animate-glow-pulse` | `glow-pulse 2.5s ease-in-out infinite` — box-shadow pulse |
+| `--animate-float` | `float 4s ease-in-out infinite` — translateY 0↔-12px |
+| `--animate-gradient-shift` | `gradient-shift 4s ease infinite` — background-position shift |
+| `--animate-fade-in-up` | `fade-in-up 0.6s ease forwards` — opacity+translateY entrance |
+| `--animate-marquee` | `marquee 30s linear infinite` — translateX(-50%) continuous scroll |
 
 ### Animation Conventions
-- Section entry: `SectionWrapper` with `useInView`. Children use `variants={itemVariants}` imported from `SectionWrapper.tsx`.
-- Hover cards: `whileHover={{ scale: 1.03 }}` in `GlowCard`, `whileHover={{ y: -6 }}` in Differentials.
-- Hero: standalone `containerVariants` + `itemVariants` defined locally (not from SectionWrapper).
-- CSS animations: `animate-glow-pulse` on CTA button; `btn-gradient` uses `gradient-shift` keyframe.
+- **Section entry**: `SectionWrapper` with `useInView`. Children use `variants={itemVariants}` imported from `SectionWrapper.tsx`.
+- **Hover cards (GlowCard)**: `whileHover={{ scale: 1.02 }}` + 3D tilt via `useMotionValue`/`useSpring`/`useTransform`. Reset on `onMouseLeave`.
+- **Hover cards (Differentials)**: `whileHover={{ y: -6 }}` + `.gradient-border-card` top accent.
+- **Hero**: standalone `containerVariants` + `itemVariants` defined locally (not from SectionWrapper). Parallax on `motion.section` via `useScroll`+`useTransform`.
+- **Floating orbs**: `animate-float` with different `animationDelay` per orb for offset rhythm.
+- **Section headings**: `AnimatedHeading` component — word-by-word blur+fade, fires once on viewport entry. Use `highlightWords` prop to apply `gradient-text` to specific words.
+- **Animated stats**: `CountUp` component — animates 0→N using `useMotionValue`+`animate`. Non-numeric values (e.g. "24/7") must be rendered as static strings.
+- **Magnetic buttons**: `<Button magnetic>` — primary CTAs in Hero and CTA section only. Do NOT add `magnetic` to form submit buttons or Navbar CTAs.
+- **Scroll progress bar**: In `Navbar.tsx` — `useScroll()` → `scrollYProgress` → `motion.div scaleX`.
+- **CSS animations**: `animate-glow-pulse` on CTA; `btn-gradient` uses `gradient-shift`; `animate-marquee` on TechMarquee track.
 
 ---
 
@@ -116,7 +146,6 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 
 ---
 
-## Known Issues / TODOs
 - `ContactForm.tsx`: `handleSubmit` uses `setTimeout` to simulate a POST. Replace with `fetch('/api/contact', ...)` when a backend route is added.
 - `Footer.tsx`: Social icon `href` values are `#` placeholders. Replace with real URLs.
 - `suppressHydrationWarning` on `<html>` is intentional — suppresses mismatches caused by browser extensions (e.g., LanguageTool) that inject attributes on the client.
@@ -127,7 +156,69 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 
 1. **Run `npm run build` after any change** — Turbopack is strict about TypeScript; catch errors before reporting work done.
 2. **No new `tailwind.config.ts`** — all tokens go in `globals.css @theme`.
-3. **Framer Motion components require `'use client'`** — add the directive to any file using `motion`, `useInView`, `AnimatePresence`, etc.
-4. **Server Components stay server** — `Footer.tsx` and `layout.tsx` are intentionally server components. Don't add `'use client'` to them without a reason.
+3. **Framer Motion components require `'use client'`** — add the directive to any file using `motion`, `useInView`, `AnimatePresence`, `useScroll`, `useMotionValue`, etc.
+4. **Server Components stay server** — `Footer.tsx`, `layout.tsx`, and `TechMarquee.tsx` are intentionally server components. Don't add `'use client'` to them without a reason.
 5. **Use `cn()` from `@/lib/utils`** for conditional class merging — never string concatenation.
 6. **Check lucide-react availability** — if adding a new icon, verify it exists in v1 before using it.
+7. **Button + Framer Motion type conflict** — `ButtonProps` uses `Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag'|'onDragEnd'|'onDragStart'|'onDragEnter'|'onDragLeave'|'onDragOver'|'onDrop'|'onAnimationStart'|'onAnimationEnd'|'onAnimationIteration'>` to avoid type conflicts with `motion.button`. Keep this Omit if adding new props to Button.
+8. **CountUp `animate` overload** — use `animate(motionValue, target, options)` (MotionValue first argument), not `animate(fromNumber, toNumber, options)`. The latter has TypeScript overload issues in Framer Motion v12.
+9. **`AnimatedHeading` fires independently** — it uses its own `useInView`, not the parent `SectionWrapper` stagger. Place it inside a `motion.div variants={itemVariants}` wrapper only if you want the surrounding block (label + subtitle) to stagger together. The heading itself always animates word-by-word on its own.
+10. **`gradient-border-card` is CSS-only** — it uses a `::before` pseudo-element (top accent line). It does NOT use `isolation: isolate` or negative z-index. Safe to combine with any Framer Motion `motion.div`.
+
+---
+
+## Documentation Sync Protocol
+
+This project serves multiple AI agents. Every agent has its own rules file. **When making structural changes, all files must be updated together** — a stale rules file causes future agents to work from wrong assumptions.
+
+### Files and their consumers
+
+| File | Consumed by | Scope |
+|---|---|---|
+| `AGENTS.md` | OpenAI Codex CLI (auto-loaded) + any LLM given project context | Full technical reference: architecture, gotchas, conventions |
+| `README.md` | All agents + humans | Project overview, design system, section list |
+| `.cursorrules` | Cursor | Component props, gotchas, structure, conventions |
+| `.windsurfrules` | Windsurf | Tokens, conventions, critical gotchas |
+| `CLAUDE.md` | Claude Code (auto-loaded) | Update triggers, multi-agent sync reminder |
+| `.claude/settings.json` | Claude Code | Stop hook: reminder fires automatically at session end |
+
+### What to update in each file
+
+**AGENTS.md** — the source of truth. Update:
+- Project Architecture section (new/removed components, new props)
+- Global CSS Utilities table (new classes, keyframes)
+- Animation Conventions section (new patterns)
+- Rules for Agents section (new gotchas)
+
+**README.md** — update:
+- Project structure tree (new files)
+- Design System tables (new tokens, utilities)
+- Seções table (new or reordered sections)
+
+**.cursorrules** — update:
+- "Componentes UI" section (new component, new props, new gotchas)
+- "Classes CSS globais" table (new utilities)
+- "Estrutura de componentes" block
+- "Convenções de animação" section
+
+**.windsurfrules** — update:
+- "Tokens do design system" table
+- "Classes utilitárias globais" table
+- "Componentes — props e gotchas críticos" section
+- "Estrutura" block
+
+### Trigger checklist
+
+Update all four files when any of the following occurs:
+
+- [ ] New component created in `src/components/`
+- [ ] New prop added to an existing component (variant, behavior flag, visual option)
+- [ ] New CSS utility class or keyframe added to `globals.css`
+- [ ] New animation pattern or architectural convention established
+- [ ] New gotcha or compatibility rule discovered (type conflict, library limitation)
+- [ ] Section order changed in `page.tsx`
+- [ ] Dependency added or upgraded with behavioral impact
+
+---
+
+## Known Issues / Pending Work

@@ -1,37 +1,81 @@
 # MaximWeb Landing Page — Windsurf Rules
 
 ## Projeto
-Landing page premium para a agência MaximWeb. Dark UI com glassmorphism e animações Framer Motion.
+Landing page premium para a agência MaximWeb. Dark UI com glassmorphism, glows azuis e animações Framer Motion avançadas.
 
 ## Stack
 Next.js 16 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 · lucide-react v1
 
+---
+
 ## Antes de qualquer código
 
 1. **Tailwind v4**: Sem `tailwind.config.ts`. Tokens em `src/app/globals.css @theme {}`
-2. **lucide-react v1**: Ícones de marca foram removidos (Github, Instagram, Linkedin não existem)
+2. **lucide-react v1**: Ícones de marca foram removidos (Github, Instagram, Linkedin, Twitter não existem)
 3. **`'use client'`**: Obrigatório em qualquer arquivo com hooks, Framer Motion ou event handlers
-4. **`cn()`**: Use sempre de `@/lib/utils` para classes condicionais
-5. **`npm run build`**: Deve passar antes de qualquer entrega
+4. **Server Components** (não adicionar `'use client'`): `Footer.tsx`, `layout.tsx`, `TechMarquee.tsx`
+5. **`cn()`**: Use sempre de `@/lib/utils` para classes condicionais
+6. **`npm run build`**: Deve passar com 0 erros TypeScript antes de qualquer entrega
+
+---
 
 ## Tokens do design system
 
-| Classe | Uso |
-|---|---|
-| `bg-bg-main` (#0B0B0F) | Fundo de seções ímpares |
-| `bg-bg-secondary` (#111118) | Fundo de seções pares |
-| `bg-bg-card` (#14142A) | Fundo de cards (Differentials) |
-| `text-brand-glow` (#60A5FA) | Cor de ícones e destaques |
-| `bg-brand-primary` (#3B82F6) | Botões e bordas de acento |
-| `border-border-subtle` (#272740) | Bordas de cards |
-| `text-text-muted` (#6B7280) | Texto secundário |
+| Classe Tailwind | Hex | Uso |
+|---|---|---|
+| `bg-bg-main` | #0B0B0F | Fundo de seções ímpares |
+| `bg-bg-secondary` | #111118 | Fundo de seções pares |
+| `bg-bg-card` | #14142A | Fundo de cards (Differentials) |
+| `text-brand-glow` | #60A5FA | Ícones e destaques |
+| `bg-brand-primary` | #3B82F6 | Botões e bordas de acento |
+| `border-border-subtle` | #272740 | Bordas de cards |
+| `text-text-muted` | #6B7280 | Texto secundário |
 
-## Classes utilitárias globais
-`.glass` `.hero-grid` `.gradient-text` `.btn-gradient` `.dark-input` `.section-divider`
+---
+
+## Classes utilitárias globais (`globals.css`)
+
+| Classe | Efeito |
+|---|---|
+| `.glass` | Glassmorphism: fundo semi-opaco + blur(12px) + borda sutil |
+| `.hero-grid` | Grid de linhas azuis — usado para parallax via `backgroundPositionY` |
+| `.gradient-text` | Texto com gradiente azul→indigo |
+| `.btn-gradient` | Gradiente animado no botão |
+| `.dark-input` | Input escuro com glow azul no foco |
+| `.section-divider` | Linha divisória com gradiente azul central |
+| `.gradient-border-card` | Linha accent no topo do card no hover (CSS `::before`, sem z-index negativo) |
+| `body::after` | Film grain estático decorativo |
+
+---
+
+## Componentes — props e gotchas críticos
+
+### `Button.tsx`
+- Variantes: `primary` | `secondary` | `ghost`; Props: `loading`, `magnetic`
+- Usa `motion.button`. Interface usa `Omit<ButtonHTMLAttributes, 'onDrag'|...|'onAnimationStart'|...>` — OBRIGATÓRIO para evitar conflito de tipos com Framer Motion
+- `magnetic` apenas nos CTAs do Hero e CTA section
+
+### `GlowCard.tsx`
+- Glassmorphism + tilt 3D no mousemove (`useMotionValue` + `useSpring` + `useTransform`)
+- Usa `transformPerspective: 1000` no `style` (não CSS `perspective` no pai)
+
+### `AnimatedHeading.tsx`
+- Props: `text`, `highlightWords[]`, `as` (h1/h2/h3)
+- Anima palavra por palavra (blur+fade) com `useInView` próprio
+- `highlightWords` aplica `gradient-text` nas palavras especificadas
+
+### `CountUp.tsx`
+- **GOTCHA**: usar `animate(motionValue, target, options)` — NÃO `animate(number, number)` (conflito de overload no FM v12)
+- Valores não-numéricos (ex: "24/7") devem ser strings estáticas no componente pai
+
+### `TechMarquee.tsx`
+- Server component puro — sem `'use client'`, sem hooks
+
+---
 
 ## Padrão de animação de seções
+
 ```tsx
-// SectionWrapper já gerencia useInView + stagger
 import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 
 <SectionWrapper id="secao">
@@ -39,7 +83,37 @@ import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 </SectionWrapper>
 ```
 
+**Hero** usa animações locais próprias (não usa SectionWrapper).
+
+---
+
+## Estrutura
+
+```
+src/components/ui/       → Button, GlowCard, SectionWrapper, AnimatedHeading, CountUp, TechMarquee
+src/components/layout/   → Navbar (client), Footer (server)
+src/components/sections/ → Hero, Services, Products, Differentials, CTA, ContactForm
+src/app/globals.css      → @theme + keyframes + classes utilitárias
+src/lib/utils.ts         → cn()
+```
+
+**Ordem em `page.tsx`:** Navbar → Hero → TechMarquee → Services → Products → Differentials → CTA → ContactForm → Footer
+
+---
+
 ## Documentação completa
-- `AGENTS.md` — guia técnico para automação
-- `docs/ARCHITECTURE.md` — padrões de composição e decisões
-- `docs/DESIGN_TOKENS.md` — referência visual completa
+- `AGENTS.md` — guia técnico completo para automação e LLMs
+- `README.md` — visão geral, design system, seções
+
+## Manutenção de documentação
+
+Se você adicionou ou alterou componentes, props, CSS utilities, keyframes ou convenções, atualize **todos** os arquivos abaixo antes de encerrar:
+
+| Arquivo | Agente |
+|---|---|
+| `AGENTS.md` | OpenAI Codex CLI + qualquer LLM |
+| `README.md` | Todos |
+| `.cursorrules` | Cursor |
+| `.windsurfrules` | Windsurf (este arquivo) |
+
+Consulte a seção "Documentation Sync Protocol" em `AGENTS.md` para saber exatamente o que atualizar em cada arquivo.

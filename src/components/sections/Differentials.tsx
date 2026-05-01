@@ -3,6 +3,7 @@
 import { Zap, TrendingUp, Palette, Headphones } from 'lucide-react'
 import { motion } from 'framer-motion'
 import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
+import AnimatedHeading from '@/components/ui/AnimatedHeading'
 
 const DIFFERENTIALS = [
   {
@@ -43,9 +44,11 @@ export default function Differentials() {
           <p className="text-brand-glow text-sm font-semibold uppercase tracking-widest mb-3">
             Por que nos escolher
           </p>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-            Nossos <span className="gradient-text">Diferenciais</span>
-          </h2>
+          <AnimatedHeading
+            text="Nossos Diferenciais"
+            highlightWords={['Diferenciais']}
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4"
+          />
           <p className="text-text-muted text-lg max-w-xl mx-auto">
             O que nos torna a escolha certa para o seu próximo projeto digital.
           </p>
@@ -59,7 +62,7 @@ export default function Differentials() {
               whileHover={{ y: -6, transition: { duration: 0.25 } }}
               className="group relative p-6 rounded-2xl border border-border-subtle
                          bg-bg-card hover:border-brand-primary/40 transition-all duration-300
-                         hover:shadow-[0_0_32px_rgba(59,130,246,0.12)]"
+                         hover:shadow-[0_0_32px_rgba(59,130,246,0.12)] gradient-border-card"
             >
               {/* Number indicator */}
               <span className="absolute top-4 right-4 text-3xl font-black text-white/[0.04]

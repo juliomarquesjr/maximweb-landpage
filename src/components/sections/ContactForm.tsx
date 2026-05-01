@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Send, CheckCircle2, AlertCircle, User, Mail, Phone, MessageSquare } from 'lucide-react'
 import SectionWrapper, { itemVariants } from '@/components/ui/SectionWrapper'
 import Button from '@/components/ui/Button'
+import AnimatedHeading from '@/components/ui/AnimatedHeading'
 import { cn } from '@/lib/utils'
 
 interface FormState {
@@ -83,9 +84,11 @@ export default function ContactForm() {
           <p className="text-brand-glow text-sm font-semibold uppercase tracking-widest mb-3">
             Entre em contato
           </p>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
-            Fale com a <span className="gradient-text">MaximWeb</span>
-          </h2>
+          <AnimatedHeading
+            text="Fale com a MaximWeb"
+            highlightWords={['MaximWeb']}
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4"
+          />
           <p className="text-text-muted text-lg max-w-md mx-auto">
             Conte-nos sobre seu projeto e entraremos em contato em até 24 horas.
           </p>

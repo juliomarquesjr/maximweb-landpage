@@ -6,6 +6,7 @@ import Products      from '@/components/sections/Products'
 import Differentials from '@/components/sections/Differentials'
 import CTA           from '@/components/sections/CTA'
 import ContactForm   from '@/components/sections/ContactForm'
+import TechMarquee   from '@/components/ui/TechMarquee'
 
 export default function HomePage() {
   return (
@@ -13,6 +14,7 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
+        <TechMarquee />
         <div className="section-divider" />
         <Services />
         <div className="section-divider" />

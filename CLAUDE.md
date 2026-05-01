@@ -20,6 +20,29 @@ Este é o repositório da landing page da agência **MaximWeb**. Leia os documen
 4. **Use `cn()` de `@/lib/utils`** para classes condicionais
 5. Se adicionando ícones do lucide-react, confirme que existem na v1 antes de importar
 
+## Após qualquer tarefa estrutural
+
+Se a tarefa adicionou, removeu ou alterou qualquer um dos itens abaixo, **atualize todos os arquivos de documentação listados** antes de encerrar:
+
+**Gatilhos de atualização:**
+- Novo componente em `src/components/`
+- Nova prop relevante em componente existente (ex: variante, comportamento, flag)
+- Nova classe utilitária ou keyframe em `globals.css`
+- Nova convenção de animação ou padrão arquitetural
+- Novo gotcha ou regra de compatibilidade descoberta (ex: conflito de tipos, limitação de biblioteca)
+- Alteração na ordem das seções em `page.tsx`
+
+**Arquivos a atualizar (todos, sem exceção):**
+
+| Arquivo | Agente que consome | O que manter atualizado |
+|---|---|---|
+| `AGENTS.md` | OpenAI Codex CLI + qualquer LLM | Arquitetura, gotchas, convenções completas |
+| `README.md` | Todos (referência humana e LLM) | Estrutura do projeto, design system, seções |
+| `.cursorrules` | Cursor | Props de componentes, gotchas, estrutura |
+| `.windsurfrules` | Windsurf | Tokens, convenções, gotchas críticos |
+
+> A documentação desatualizada é mais prejudicial do que nenhuma documentação — ela induz agentes futuros a erro.
+
 ## Servidor de desenvolvimento
 
 ```bash

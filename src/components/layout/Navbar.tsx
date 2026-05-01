@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll } from 'framer-motion'
 import { Menu, X, Zap } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
@@ -16,6 +16,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 24)
@@ -43,6 +44,14 @@ export default function Navbar() {
           : 'bg-transparent'
       )}
     >
+      {/* Scroll progress bar */}
+      <motion.div
+        aria-hidden
+        style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
+        className="absolute top-0 left-0 right-0 h-[2px] z-60 origin-left
+                   bg-gradient-to-r from-brand-primary via-brand-glow to-[#818CF8]"
+      />
+
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
         {/* Logo */}
