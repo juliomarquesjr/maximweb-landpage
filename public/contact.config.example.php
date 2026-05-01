@@ -10,5 +10,5 @@ declare(strict_types=1);
 return [
     'resend_api_key' => '',
     'mail_from'      => 'Contato <naoresponda@maximweb.com.br>',
-    'mail_to'        => 'juliocmarquesjr@gmail.com.com',
+    'mail_to'        => 'juliocmarquesjr@gmail.com',
 ];

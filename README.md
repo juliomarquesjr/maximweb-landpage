@@ -47,7 +47,7 @@ O envio **não** usa variáveis Node. Em produção o browser faz `POST /contact
 
 1. Crie conta Resend, gere API key e verifique o domínio do remetente (`mail_from`).
 2. No servidor, copie [`public/contact.config.example.php`](public/contact.config.example.php) para **`contact.config.local.php`** na mesma pasta pública que `index.html` (e o mesmo diretório que `contact.php`).
-3. Preencha `resend_api_key`, `mail_from` (ex.: `Contato <contato@seudominio.com.br>`), `mail_to` (ex.: `julio@email.com.br`). O arquivo `contact.config.local.php` está no [`.gitignore`](.gitignore).
+3. Preencha `resend_api_key`, `mail_from` (ex.: `Contato <contato@seudominio.com.br>`), `mail_to` (ex.: `juliocmarquesjr@gmail.com`). O arquivo `contact.config.local.php` está no [`.gitignore`](.gitignore).
 
 **`npm run dev`:** o Next não executa PHP — `/contact.php` não envia neste modo. Teste o formulário no cPanel ou num ambiente Apache+PHP.
 

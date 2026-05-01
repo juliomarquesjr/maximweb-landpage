@@ -81,4 +81,4 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [docs/multiagentes/templates/qa-performance.md](../../multiagentes/templates/qa-performance.md) | Prompt — QA/Performance | `1a71063d1187d31f` |
 | [docs/multiagentes/templates/ui-engineer.md](../../multiagentes/templates/ui-engineer.md) | Prompt — UI Engineer | `d0ccf2479a2e800b` |
 | [package.json](../../../package.json) | package.json | `cb9a2ffdebd4bfb9` |
-| [README.md](../../../README.md) | MaximWeb — Landing Page | `85ab63fb9d4b61c4` |
+| [README.md](../../../README.md) | MaximWeb — Landing Page | `e83b5b3d86787419` |
