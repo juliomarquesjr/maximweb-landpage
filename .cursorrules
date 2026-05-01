@@ -63,6 +63,15 @@ Next.js 16 · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer Motion 12 ·
 - Renderizar o logo com `next/image`, `width`/`height` explicitos e `sizes` fixo para evitar layout shift
 
 ### ContactForm (`src/components/sections/ContactForm.tsx`) + `public/contact.php`
+- Wizard conversacional em 4 passos: Nome → Email → Telefone → Mensagem (um campo por vez)
+- `AnimatePresence mode="wait"` + `slideVariants` direction-aware (`dir: 1 | -1`): slide+blur entrada/saída
+- `ReceiptPanel` (desktop, coluna esquerda): acumula respostas já dadas com `opacity` animation e `AnimatePresence` para troca valor↔placeholder
+- `SuccessState`: burst de 18 partículas radiais (`motion.div` com `animate opacity+scale+x+y`) + check spring + anel expansivo
+- Step dots: `animate-glow-pulse` no passo atual, largos nos anteriores, estreitos nos seguintes
+- Barra de progresso: `motion.div` com `animate={{ width }}` spring
+- Autofocus por passo (delay 340ms, refs separados para `input` e `textarea`)
+- Teclado: Enter avança (exceto textarea); ⌘/Ctrl+Enter envia no textarea
+- `motion.button` direto para o botão Continuar/Enviar — NÃO usar `<Button magnetic>`
 - Client: `fetch('/contact.php', { body: JSON.stringify(form) })`; estados `success` | `error` | `unavailable` (503)
 - Servidor (cPanel / PHP): `contact.php` valida, chama API Resend via cURL; segredos em `contact.config.local.php` (gitignored). Sem config → 503
 
@@ -111,6 +120,7 @@ Navbar → Hero → TechMarquee → [section-divider] → Services → Products 
 - **Títulos de seção**: `<AnimatedHeading>` com `highlightWords` para palavras em gradiente
 - **Scroll progress**: `Navbar.tsx` — `useScroll()` → `scrollYProgress` → `motion.div scaleX`
 - **Botões magnéticos**: `<Button magnetic>` apenas no Hero e CTA section
+- **ContactForm wizard**: `AnimatePresence mode="wait"` + `custom={dir}` nos `motion.div` de cada passo. Direção rastreada com `useState<1|-1>`. `ReceiptPanel` usa `motion.div animate={{ opacity }}` + `AnimatePresence` para value↔placeholder. `SuccessState` usa partículas animadas com `motion.div`. Botão de avanço é `motion.button` com `whileHover/whileTap` — nunca `<Button magnetic>`
 
 ---
 

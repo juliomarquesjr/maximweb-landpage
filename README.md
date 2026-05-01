@@ -167,7 +167,7 @@ Fonte principal: **Inter** (via `next/font/google`)
 | 4 | `Products.tsx` | `bg-secondary` | 4 GlowCards com glow colorido por card |
 | 5 | `Differentials.tsx` | `bg-main` | Top-accent hover, hover y:-6 |
 | 6 | `CTA.tsx` | `bg-secondary` | Botão magnético pulsante |
-| 7 | `ContactForm.tsx` | `bg-main` | Validação + POST `/contact.php` |
+| 7 | `ContactForm.tsx` | `bg-main` | Wizard conversacional 4 passos · AnimatePresence slide+blur · ReceiptPanel (desktop) · burst de partículas no sucesso · POST `/contact.php` |
 | — | `Footer.tsx` | `bg-secondary` | Server component |
 
 ---

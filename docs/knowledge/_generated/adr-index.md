@@ -15,6 +15,7 @@ Durable technical decisions live in `adr/`. This generated page indexes them for
 | [ADR 004 — Estratégia Client/Server Component boundary](../../../adr/004-server-client-boundary.md) | 2026-05-01 | Aceito | `05706031657cdb47` |
 | [ADR 005 — Formulário de contato via PHP (cPanel) + Resend](../../../adr/005-formulario-contato-php-resend.md) | 2026-05-01 | Aceito | `a3d349e134e61e99` |
 | [ADR 006 — Deploy local para cPanel via FTP/FTPS](../../../adr/006-deploy-local-cpanel-ftp.md) | 2026-05-01 | Aceito | `2e9860c9537de685` |
+| [ADR 007 — ContactForm: wizard conversacional em passos](../../../adr/007-contactform-wizard-conversacional.md) | 2026-05-01 | Aceito | `9c6c658d5cf16e32` |
 
 ## Decision Headings
 
@@ -73,3 +74,13 @@ Source: [adr/006-deploy-local-cpanel-ftp.md](../../../adr/006-deploy-local-cpane
   - Decisao
   - Consequencias
   - Referencias
+
+### ADR 007 — ContactForm: wizard conversacional em passos
+
+Source: [adr/007-contactform-wizard-conversacional.md](../../../adr/007-contactform-wizard-conversacional.md)
+
+- ADR 007 — ContactForm: wizard conversacional em passos
+  - Contexto
+  - Decisão
+  - Consequências
+  - Referências

@@ -81,8 +81,13 @@ src/
       Differentials.tsx — 4 cards (bg-bg-card + gradient-border-card top-accent hover);
                           whileHover y:-6; AnimatedHeading title
       CTA.tsx           — AnimatedHeading; magnetic primary Button; animate-glow-pulse
-      ContactForm.tsx   — client-side validation; POST para `/contact.php`; estado `unavailable` se 503;
-                          AnimatedHeading title
+      ContactForm.tsx   — wizard conversacional em 4 passos (um campo por vez);
+                          AnimatePresence + slideVariants direction-aware (slide+blur) entre steps;
+                          ReceiptPanel (desktop, coluna esquerda) acumula respostas com opacity animation;
+                          SuccessState com burst de 18 partículas radiais + check spring + anel expansivo;
+                          barra de progresso spring + step dots (animate-glow-pulse no passo atual);
+                          autofocus por passo; Enter avança; ⌘/Ctrl+Enter envia no textarea;
+                          POST /contact.php; estados success | error | unavailable (503)
 ```
 
 ---
@@ -134,6 +139,7 @@ src/
 - **Magnetic buttons**: `<Button magnetic>` — primary CTAs in Hero and CTA section only. Do NOT add `magnetic` to form submit buttons or Navbar CTAs.
 - **Scroll progress bar**: In `Navbar.tsx` — `useScroll()` → `scrollYProgress` → `motion.div scaleX`.
 - **CSS animations**: `animate-glow-pulse` on CTA; `btn-gradient` uses `gradient-shift`; `animate-marquee` on TechMarquee track.
+- **ContactForm wizard**: 4 passos com `AnimatePresence mode="wait"` + `slideVariants` customizados (direção rastreada com `dir: 1 | -1`). `ReceiptPanel` anima cada resposta com `opacity` e `AnimatePresence` para troca valor/placeholder. `SuccessState` dispara burst radial de partículas via `motion.div` com `animate` `opacity+scale+x+y`. Step dots usam `animate-glow-pulse` no passo atual. Não usar `<Button magnetic>` no botão de avanço — usar `motion.button` direto.
 
 ---
 

@@ -77,6 +77,12 @@ Next.js 16 (App Router) · React 19 · TypeScript 5 · Tailwind CSS v4 · Framer
 - Renderizar o logo com `next/image`, `width`/`height` explicitos e `sizes` fixo para evitar layout shift
 
 ### `ContactForm` + `contact.php`
+- Wizard conversacional em 4 passos (Nome → Email → Telefone → Mensagem), um campo por vez
+- `AnimatePresence mode="wait"` + `slideVariants` com `custom={dir}` (dir: `1` avança, `-1` volta): slide+blur entre passos
+- `ReceiptPanel` (coluna esquerda, só desktop): acumula respostas com `opacity` animation e `AnimatePresence` value↔placeholder
+- `SuccessState`: burst de 18 partículas radiais + check icon spring + anel expansivo
+- Step dots: `animate-glow-pulse` no atual; barra de progresso com `animate={{ width }}` spring
+- Autofocus 340ms por passo; Enter avança; ⌘/Ctrl+Enter envia textarea; botão Continuar = `motion.button` (NÃO `<Button magnetic>`)
 - Client: POST JSON para `/contact.php`; 503 → estado `unavailable`
 - Produção: PHP + Resend; `public/contact.config.local.php` (não versionar) com API key e e-mails
 
