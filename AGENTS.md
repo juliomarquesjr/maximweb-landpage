@@ -127,7 +127,17 @@ src/
 ```bash
 npm run dev     # starts at http://localhost:3000
 npm run build   # must pass with 0 TypeScript errors before any PR
+npm run knowledge:sync   # regenerates docs/knowledge/_generated
+npm run knowledge:check  # verifies generated knowledge is current
 ```
+
+## Obsidian Knowledge Vault
+
+- The project knowledge vault lives in `docs/knowledge/`.
+- For large tasks, read `docs/knowledge/00-index.md` after `AGENTS.md`.
+- Generated files under `docs/knowledge/_generated/` are maintained by `npm run knowledge:sync`; do not edit them manually.
+- Durable decisions stay in `adr/`. The Obsidian vault indexes and connects them, but does not replace ADRs.
+- After structural documentation changes, durable technical decisions, or new reusable patterns, run `npm run knowledge:sync`.
 
 ### Playwright MCP (Visual Testing)
 The project has Playwright MCP configured in `.claude/settings.json`. It is available when Claude Code is started from this directory. Use it to take screenshots and verify visual changes before marking work as done.
@@ -164,6 +174,7 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 8. **CountUp `animate` overload** — use `animate(motionValue, target, options)` (MotionValue first argument), not `animate(fromNumber, toNumber, options)`. The latter has TypeScript overload issues in Framer Motion v12.
 9. **`AnimatedHeading` fires independently** — it uses its own `useInView`, not the parent `SectionWrapper` stagger. Place it inside a `motion.div variants={itemVariants}` wrapper only if you want the surrounding block (label + subtitle) to stagger together. The heading itself always animates word-by-word on its own.
 10. **`gradient-border-card` is CSS-only** — it uses a `::before` pseudo-element (top accent line). It does NOT use `isolation: isolate` or negative z-index. Safe to combine with any Framer Motion `motion.div`.
+11. **Keep the Obsidian vault current** — run `npm run knowledge:sync` after updating structural docs, ADRs, agent rules, or technical patterns.
 
 ---
 
@@ -181,6 +192,7 @@ This project serves multiple AI agents. Every agent has its own rules file. **Wh
 | `.windsurfrules` | Windsurf | Tokens, conventions, critical gotchas |
 | `CLAUDE.md` | Claude Code (auto-loaded) | Update triggers, multi-agent sync reminder |
 | `.claude/settings.json` | Claude Code | Stop hook: reminder fires automatically at session end |
+| `docs/knowledge/` | Obsidian + agents | Navigable technical memory, generated indexes, patterns |
 
 ### What to update in each file
 
@@ -218,6 +230,7 @@ Update all four files when any of the following occurs:
 - [ ] New gotcha or compatibility rule discovered (type conflict, library limitation)
 - [ ] Section order changed in `page.tsx`
 - [ ] Dependency added or upgraded with behavioral impact
+- [ ] Durable decision, technical pattern, or agent rule changed (`npm run knowledge:sync`)
 
 ---
 

@@ -40,7 +40,7 @@ export default function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         scrolled
-          ? 'glass border-b border-border-subtle shadow-lg shadow-black/20'
+          ? 'bg-[rgba(20,20,35,0.88)] backdrop-blur-xl shadow-lg shadow-black/20'
           : 'bg-transparent'
       )}
     >
@@ -113,7 +113,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="md:hidden glass border-t border-border-subtle overflow-hidden"
+            className="md:hidden bg-[rgba(20,20,35,0.92)] backdrop-blur-xl overflow-hidden"
           >
             <ul className="px-6 py-4 flex flex-col gap-1">
               {NAV_LINKS.map(({ label, href }) => (

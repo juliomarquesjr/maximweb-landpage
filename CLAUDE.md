@@ -11,6 +11,7 @@ Este é o repositório da landing page da agência **MaximWeb**. Leia os documen
 | [README.md](README.md) | Visão geral, stack, estrutura, design system, scripts |
 | [AGENTS.md](AGENTS.md) | Guia técnico completo — gotchas, tokens, convenções, regras |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Padrões de código, commits, branch naming, PR checklist |
+| [docs/knowledge/00-index.md](docs/knowledge/00-index.md) | Vault Obsidian com memoria tecnica navegavel para agentes |
 
 ## Antes de qualquer tarefa
 
@@ -19,6 +20,7 @@ Este é o repositório da landing page da agência **MaximWeb**. Leia os documen
 3. **Não crie `tailwind.config.ts`** — configuração fica em `src/app/globals.css @theme`
 4. **Use `cn()` de `@/lib/utils`** para classes condicionais
 5. Se adicionando ícones do lucide-react, confirme que existem na v1 antes de importar
+6. Em tarefas grandes, consulte `docs/knowledge/00-index.md` depois do `AGENTS.md`
 
 ## Após qualquer tarefa estrutural
 
@@ -40,8 +42,11 @@ Se a tarefa adicionou, removeu ou alterou qualquer um dos itens abaixo, **atuali
 | `README.md` | Todos (referência humana e LLM) | Estrutura do projeto, design system, seções |
 | `.cursorrules` | Cursor | Props de componentes, gotchas, estrutura |
 | `.windsurfrules` | Windsurf | Tokens, convenções, gotchas críticos |
+| `docs/knowledge/` | Obsidian + agentes | Memoria tecnica, indices gerados e padroes navegaveis |
 
 > A documentação desatualizada é mais prejudicial do que nenhuma documentação — ela induz agentes futuros a erro.
+
+Depois de qualquer mudanca estrutural, decisao tecnica duradoura ou novo padrao reutilizavel, rode `npm run knowledge:sync` para atualizar `docs/knowledge/_generated/`.
 
 ## Servidor de desenvolvimento
 

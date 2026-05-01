@@ -51,6 +51,8 @@ Abra [http://localhost:3000](http://localhost:3000) no navegador.
 | `npm run build` | Build de produção |
 | `npm run start` | Inicia o servidor de produção (após build) |
 | `npm run lint` | Executa ESLint |
+| `npm run knowledge:sync` | Regenera os indices do vault Obsidian em `docs/knowledge/_generated` |
+| `npm run knowledge:check` | Verifica se o vault Obsidian esta atualizado |
 
 ---
 
@@ -195,6 +197,15 @@ Veja [CONTRIBUTING.md](CONTRIBUTING.md) para o guia completo de contribuição.
 Para acelerar tarefas com IA usando papeis paralelos (planner, UI, copy e QA), consulte:
 
 - [docs/multiagentes/README.md](docs/multiagentes/README.md)
+
+## Obsidian Knowledge Vault
+
+O projeto inclui um vault Obsidian versionado em [docs/knowledge/00-index.md](docs/knowledge/00-index.md), focado em memoria tecnica para agentes.
+
+- A fonte de verdade continua sendo o codigo, `AGENTS.md`, `README.md`, `docs/` e `adr/`.
+- Arquivos em `docs/knowledge/_generated/` sao recriados por `npm run knowledge:sync`.
+- Antes de PRs com mudancas estruturais, decisoes tecnicas ou novos padroes, rode `npm run knowledge:check`.
+- Abra `docs/knowledge/` no Obsidian para navegar por regras, arquitetura, ADRs e padroes tecnicos.
 
 ---
 

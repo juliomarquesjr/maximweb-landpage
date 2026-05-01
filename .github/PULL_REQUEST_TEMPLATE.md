@@ -15,6 +15,8 @@
 
 - [ ] `npm run build` passa sem erros
 - [ ] `npm run lint` passa sem erros
+- [ ] `npm run knowledge:sync` executado quando houve mudanca estrutural, decisao tecnica ou novo padrao
+- [ ] `npm run knowledge:check` passa sem arquivos gerados desatualizados
 - [ ] Testado visualmente no browser em `localhost:3000`
 - [ ] Componentes com Framer Motion / hooks têm `'use client'`
 - [ ] Novos tokens de cor/animação adicionados em `globals.css @theme` (não em `tailwind.config.ts`)

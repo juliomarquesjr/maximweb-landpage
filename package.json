@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "knowledge:sync": "node scripts/sync-obsidian.mjs sync",
+    "knowledge:check": "node scripts/sync-obsidian.mjs check"
   },
   "dependencies": {
     "clsx": "^2.1.1",
