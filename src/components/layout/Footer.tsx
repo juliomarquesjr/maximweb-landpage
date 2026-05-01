@@ -1,4 +1,5 @@
-import { Zap, GitBranch, Link, Camera, Mail } from 'lucide-react'
+import Image from 'next/image'
+import { GitBranch, Link, Camera, Mail } from 'lucide-react'
 
 const FOOTER_LINKS = {
   'Serviços': [
@@ -35,14 +36,15 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <a href="#" className="flex items-center gap-2 mb-4 group">
-              <div className="w-8 h-8 rounded-lg bg-brand-primary flex items-center justify-center
-                              group-hover:shadow-[0_0_16px_rgba(59,130,246,0.6)] transition-shadow">
-                <Zap className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-xl font-bold">
-                Maxim<span className="text-brand-glow">Web</span>
-              </span>
+            <a href="#" aria-label="MaximWeb - início" className="flex h-10 items-center mb-4 group focus-ring rounded-lg">
+              <Image
+                src="/brand/maximweb-logo.png"
+                alt="MaximWeb"
+                width={250}
+                height={52}
+                sizes="154px"
+                className="h-8 w-auto sm:h-9 transition-opacity duration-200 group-hover:opacity-95"
+              />
             </a>
             <p className="text-text-muted text-sm leading-relaxed max-w-xs">
               Transformamos ideias em soluções digitais de alta performance,

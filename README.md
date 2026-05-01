@@ -196,6 +196,25 @@ O projeto inclui o [Playwright MCP](https://github.com/microsoft/playwright-mcp)
 2. Envie para a raiz pública (`public_html` ou subpasta do domínio) o HTML/JS/CSS do Next **e** os ficheiros `contact.php`, `contact.config.example.php` e a cópia preenchida `contact.config.local.php`.
 3. Confirme que a extensão PHP está ativa e que **cURL** está habilitado.
 
+### CI/CD automático (GitHub Actions + cPanel FTP)
+
+Este repositório já inclui o workflow `.github/workflows/deploy-cpanel.yml` para build e deploy automático em hospedagem cPanel, sem plano pago.
+
+Fluxo:
+1. Push na `main` (ou execução manual em *Actions*).
+2. CI roda `npm ci` e `npm run build:static` (gera `out/`).
+3. Deploy via FTP/FTPS para o diretório público do cPanel.
+4. O arquivo `contact.config.local.php` no servidor não é sobrescrito.
+
+Configure os **GitHub Secrets** no repositório:
+- `CPANEL_FTP_SERVER` (ex.: `ftp.seudominio.com`)
+- `CPANEL_FTP_USERNAME`
+- `CPANEL_FTP_PASSWORD`
+- `CPANEL_FTP_SERVER_DIR` (ex.: `/public_html/`)
+- `CPANEL_FTP_PORT` (opcional; padrão `21`)
+
+> Recomendado: habilite FTPS no cPanel e use credenciais com acesso restrito somente ao diretório de deploy.
+
 ### Vercel / Node
 
 O deploy mais simples em plataforma Node é via [Vercel](https://vercel.com):
