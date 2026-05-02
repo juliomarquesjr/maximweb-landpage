@@ -21,7 +21,48 @@ Este é o repositório da landing page da agência **MaximWeb**. Leia os documen
 3. **Não crie `tailwind.config.ts`** — configuração fica em `src/app/globals.css @theme`
 4. **Use `cn()` de `@/lib/utils`** para classes condicionais
 5. Se adicionando ícones do lucide-react, confirme que existem na v1 antes de importar
-6. Em tarefas grandes, consulte `docs/knowledge/00-index.md` depois do `AGENTS.md`
+
+## Quando consultar o vault (`docs/knowledge/`)
+
+O vault não substitui o `AGENTS.md` — ele complementa com contexto que o `AGENTS.md` não carrega. Consulte os arquivos abaixo nos cenários indicados:
+
+| Quando... | Leia |
+|---|---|
+| Antes de modificar estrutura de componentes, fronteira client/server ou fluxo de dados | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) |
+| Antes de usar ou criar qualquer token de cor, fonte, keyframe ou classe utilitária | [`docs/DESIGN_TOKENS.md`](docs/DESIGN_TOKENS.md) |
+| Antes de criar qualquer documentação ou decidir se algo vira ADR | [`docs/knowledge/patterns/documentation-update-flow.md`](docs/knowledge/patterns/documentation-update-flow.md) |
+| Para navegar todos os ADRs e entender decisões passadas | [`docs/knowledge/_generated/adr-index.md`](docs/knowledge/_generated/adr-index.md) |
+| Para ver o mapa de arquivos, dependências e versões do projeto | [`docs/knowledge/_generated/project-map.md`](docs/knowledge/_generated/project-map.md) |
+| Em caso de dúvida sobre o papel do vault vs. documentação canônica | [`docs/knowledge/patterns/agent-memory-policy.md`](docs/knowledge/patterns/agent-memory-policy.md) |
+
+> Regra de ouro: se a dúvida é "o que existe aqui?", leia `project-map.md`. Se é "por que foi decidido assim?", leia `adr-index.md`. Se é "como devo estruturar ou documentar?", leia `documentation-update-flow.md`.
+
+## ADR — Architecture Decision Records
+
+Após concluir qualquer tarefa, avalie se a mudança justifica um novo ADR. **Nunca crie o ADR sem antes perguntar ao usuário**, informando o motivo.
+
+**Critérios para propor um ADR** (se qualquer um for verdadeiro):
+- Mudança de paradigma de interação (ex: formulário plano → wizard, layout estático → animado por passo)
+- Nova convenção de animação ou padrão de componente que será reutilizado
+- Escolha de biblioteca ou estratégia com alternativas explicitamente rejeitadas
+- Decisão de fronteira server/client com impacto em múltiplos componentes
+- Mudança de arquitetura de deploy ou integração backend
+- Qualquer decisão que um agente futuro possa "corrigir" sem entender o contexto
+
+**Não propor ADR para:**
+- Correções de bug, ajustes visuais ou refatorações locais
+- Adição de props em componentes existentes
+- Mudanças de copy ou conteúdo
+- Atualizações de documentação
+
+**Como propor:** ao final da resposta, diga ao usuário algo como:
+> "Esta mudança [descreva em 1 linha] envolve [motivo: decisão duradoura / alternativas rejeitadas / padrão novo]. Deseja que eu crie um ADR documentando a decisão?"
+
+Se o usuário confirmar, crie o arquivo em `adr/NNN-titulo-kebab-case.md` seguindo o padrão dos ADRs existentes (Contexto → Decisão → Consequências → Referências) e rode `npm run knowledge:sync` ao final.
+
+ADRs existentes: `adr/001` a `adr/007`. O próximo seria `adr/008`.
+
+---
 
 ## Após qualquer tarefa estrutural
 

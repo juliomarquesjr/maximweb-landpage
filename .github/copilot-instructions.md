@@ -45,6 +45,26 @@ src/app/
 `border-border-subtle` `text-text-muted` `font-inter`
 `animate-glow-pulse` `animate-float` `animate-gradient-shift` `animate-fade-in-up`
 
+## Quando consultar o vault
+
+| Quando... | Leia |
+|---|---|
+| Antes de modificar estrutura de componentes ou fronteira client/server | `docs/ARCHITECTURE.md` |
+| Antes de usar ou criar qualquer token, keyframe ou classe CSS | `docs/DESIGN_TOKENS.md` |
+| Para entender por que uma decisão foi tomada | `docs/knowledge/_generated/adr-index.md` |
+| Para ver mapa de arquivos e dependências | `docs/knowledge/_generated/project-map.md` |
+| Antes de criar documentação ou avaliar se algo vira ADR | `docs/knowledge/patterns/documentation-update-flow.md` |
+
+## ADR — quando propor
+
+Após qualquer tarefa estrutural, avalie se cabe um ADR. **Nunca crie sem perguntar ao usuário**, explicando o motivo.
+
+Propor quando: mudança de paradigma de interação · nova convenção de animação · escolha de biblioteca com alternativas rejeitadas · decisão de fronteira client/server · arquitetura de deploy · decisão que um agente futuro poderia silenciosamente desfazer.
+
+Não propor para: bug fix, ajuste visual, adição de prop, mudança de copy.
+
+ADRs existentes: `adr/001–007`. Próximo: `adr/008`. Após criar, rodar `npm run knowledge:sync`.
+
 ## Arquivos de referência
 
 - Leia `AGENTS.md` para guia técnico completo

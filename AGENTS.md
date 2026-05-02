@@ -155,13 +155,20 @@ npm run knowledge:sync   # regenerates docs/knowledge/_generated
 npm run knowledge:check  # verifies generated knowledge is current
 ```
 
-## Obsidian Knowledge Vault
+## Knowledge Vault & Reference Docs
 
-- The project knowledge vault lives in `docs/knowledge/`.
-- For large tasks, read `docs/knowledge/00-index.md` after `AGENTS.md`.
-- Generated files under `docs/knowledge/_generated/` are maintained by `npm run knowledge:sync`; do not edit them manually.
-- Durable decisions stay in `adr/`. The Obsidian vault indexes and connects them, but does not replace ADRs.
-- After structural documentation changes, durable technical decisions, or new reusable patterns, run `npm run knowledge:sync`.
+Consult these files for the specific scenarios listed — not all at once, not never:
+
+| File | When to read |
+|---|---|
+| `docs/ARCHITECTURE.md` | Before modifying component structure, client/server boundary, or data flow |
+| `docs/DESIGN_TOKENS.md` | Before using or creating any color token, keyframe, or CSS utility class |
+| `docs/knowledge/patterns/documentation-update-flow.md` | Before creating docs or deciding whether something warrants an ADR |
+| `docs/knowledge/_generated/adr-index.md` | To understand past decisions before taking a direction they may have already rejected |
+| `docs/knowledge/_generated/project-map.md` | To see all source files, scripts, and dependency versions at a glance |
+| `docs/knowledge/00-index.md` | Full entry point — use when none of the above match your scenario |
+
+Generated files under `docs/knowledge/_generated/` are maintained by `npm run knowledge:sync`; do not edit them manually. Durable decisions stay in `adr/`.
 
 ### Playwright MCP (Visual Testing)
 The project has Playwright MCP configured in `.claude/settings.json`. It is available when Claude Code is started from this directory. Use it to take screenshots and verify visual changes before marking work as done.
@@ -200,6 +207,7 @@ The project has Playwright MCP configured in `.claude/settings.json`. It is avai
 10. **`gradient-border-card` is CSS-only** — it uses a `::before` pseudo-element (top accent line). It does NOT use `isolation: isolate` or negative z-index. Safe to combine with any Framer Motion `motion.div`.
 11. **Brand logo performance** — keep the header logo in `public/brand/maximweb-logo.png`, optimized for the dark header. Render it with `next/image`, explicit intrinsic `width`/`height`, and a fixed `sizes` value to avoid layout shift.
 12. **Keep the Obsidian vault current** — run `npm run knowledge:sync` after updating structural docs, ADRs, agent rules, or technical patterns.
+16. **ADR evaluation after every structural task** — after completing a task, evaluate whether it warrants an Architecture Decision Record. **Never create the ADR automatically.** Instead, tell the user why you think it qualifies (e.g., "this changes the interaction paradigm / introduces a reusable pattern / has rejected alternatives worth documenting") and ask if they want one created. Criteria that trigger a proposal: interaction paradigm change, new animation/component pattern adopted as standard, library or deployment architecture choice, server/client boundary decision, or any decision a future agent might silently undo. Do NOT propose for bug fixes, visual tweaks, copy changes, or prop additions. Existing ADRs: 001–007; next is 008.
 13. **Contato em produção (cPanel)** — `ContactForm` chama `/contact.php`; segredos só em `contact.config.local.php` (não versionar). Não reintroduzir `src/app/api/contact` para o deploy estático descrito no README.
 14. **Deploy local para cPanel** — o script `scripts/deploy-cpanel.mjs` depende de `CPANEL_FTP_*` no ambiente; ele envia `out/` via FTP/FTPS e ignora `contact.config.local.php` para não sobrescrever segredos em produção.
 15. **Concorrência de upload no cPanel** — `CPANEL_FTP_CONCURRENCY` controla uploads simultâneos no script local, com limite máximo de `2` para compatibilidade com hospedagem compartilhada.

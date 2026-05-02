@@ -20,9 +20,9 @@ This page is a generated operational summary for AI agents working on this proje
 
 | Source | Title | SHA-256 |
 |---|---|---|
-| [.github/copilot-instructions.md](../../../.github/copilot-instructions.md) | GitHub Copilot Instructions — MaximWeb Landing Page | `c15114eea0ce7fee` |
-| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `2c709dbeaf16aaa9` |
-| [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `5ff826999649f994` |
+| [.github/copilot-instructions.md](../../../.github/copilot-instructions.md) | GitHub Copilot Instructions — MaximWeb Landing Page | `d8a1abed3677b951` |
+| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `33ffc383f250c56a` |
+| [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `de9dcd2888b00c31` |
 | [docs/multiagentes/checklist.md](../../multiagentes/checklist.md) | Checklist de Validacao — Landing Page | `feb3e6c272c1a37c` |
 | [docs/multiagentes/README.md](../../multiagentes/README.md) | Playbook de Multiagentes — MaximWeb | `82f46c02f148efdb` |
 
@@ -38,6 +38,8 @@ Source: [.github/copilot-instructions.md](../../../.github/copilot-instructions.
   - Estrutura de componentes
   - Padrão de animação
   - Design tokens disponíveis (via Tailwind)
+  - Quando consultar o vault
+  - ADR — quando propor
   - Arquivos de referência
 
 ### MaximWeb Landing Page — Agent Guide
@@ -56,7 +58,7 @@ Source: [AGENTS.md](../../../AGENTS.md)
     - CSS Keyframes
     - Animation Conventions
   - Development
-  - Obsidian Knowledge Vault
+  - Knowledge Vault & Reference Docs
     - Playwright MCP (Visual Testing)
 
 ### MaximWeb — Contexto para LLMs
@@ -66,6 +68,8 @@ Source: [CLAUDE.md](../../../CLAUDE.md)
 - MaximWeb — Contexto para LLMs
   - Documentação
   - Antes de qualquer tarefa
+  - Quando consultar o vault (`docs/knowledge/`)
+  - ADR — Architecture Decision Records
   - Após qualquer tarefa estrutural
   - Servidor de desenvolvimento
 

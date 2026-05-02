@@ -64,7 +64,7 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 
 | Source | Title | SHA-256 |
 |---|---|---|
-| [.github/copilot-instructions.md](../../../.github/copilot-instructions.md) | GitHub Copilot Instructions — MaximWeb Landing Page | `c15114eea0ce7fee` |
+| [.github/copilot-instructions.md](../../../.github/copilot-instructions.md) | GitHub Copilot Instructions — MaximWeb Landing Page | `d8a1abed3677b951` |
 | [adr/001-tailwind-v4-sem-config.md](../../../adr/001-tailwind-v4-sem-config.md) | ADR 001 — Tailwind CSS v4 sem tailwind.config.ts | `9f2537144759be2c` |
 | [adr/002-framer-motion-scroll-reveal.md](../../../adr/002-framer-motion-scroll-reveal.md) | ADR 002 — Framer Motion para scroll reveal via SectionWrapper | `2c8f06b6cbfb446c` |
 | [adr/003-sem-imagens-externas.md](../../../adr/003-sem-imagens-externas.md) | ADR 003 — Design sem imagens externas | `54d3cc97f9075c9d` |
@@ -72,17 +72,17 @@ This page is a generated navigation layer for the MaximWeb technical memory vaul
 | [adr/005-formulario-contato-php-resend.md](../../../adr/005-formulario-contato-php-resend.md) | ADR 005 — Formulário de contato via PHP (cPanel) + Resend | `a3d349e134e61e99` |
 | [adr/006-deploy-local-cpanel-ftp.md](../../../adr/006-deploy-local-cpanel-ftp.md) | ADR 006 — Deploy local para cPanel via FTP/FTPS | `2e9860c9537de685` |
 | [adr/007-contactform-wizard-conversacional.md](../../../adr/007-contactform-wizard-conversacional.md) | ADR 007 — ContactForm: wizard conversacional em passos | `9c6c658d5cf16e32` |
-| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `2c709dbeaf16aaa9` |
-| [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `5ff826999649f994` |
+| [AGENTS.md](../../../AGENTS.md) | MaximWeb Landing Page — Agent Guide | `33ffc383f250c56a` |
+| [CLAUDE.md](../../../CLAUDE.md) | MaximWeb — Contexto para LLMs | `de9dcd2888b00c31` |
 | [docs/ARCHITECTURE.md](../../ARCHITECTURE.md) | Arquitetura — MaximWeb Landing Page | `93c3647601bebac0` |
 | [docs/DESIGN_TOKENS.md](../../DESIGN_TOKENS.md) | Design Tokens — MaximWeb Landing Page | `7edfebf1cf038af2` |
 | [docs/multiagentes/checklist.md](../../multiagentes/checklist.md) | Checklist de Validacao — Landing Page | `feb3e6c272c1a37c` |
 | [docs/multiagentes/README.md](../../multiagentes/README.md) | Playbook de Multiagentes — MaximWeb | `82f46c02f148efdb` |
 | [docs/multiagentes/templates/copy-cro.md](../../multiagentes/templates/copy-cro.md) | Prompt — Copy/CRO | `273cb73253aaf8e1` |
-| [docs/multiagentes/templates/orchestrator.md](../../multiagentes/templates/orchestrator.md) | Prompt — Orchestrator | `cce12550aeddec58` |
+| [docs/multiagentes/templates/orchestrator.md](../../multiagentes/templates/orchestrator.md) | Prompt — Orchestrator | `b99464303820c2ae` |
 | [docs/multiagentes/templates/planner.md](../../multiagentes/templates/planner.md) | Prompt — Planner | `382e4f85dcdce5fd` |
-| [docs/multiagentes/templates/prompt-base.md](../../multiagentes/templates/prompt-base.md) | Prompt Base para Multiagentes | `be03197b41f371f3` |
+| [docs/multiagentes/templates/prompt-base.md](../../multiagentes/templates/prompt-base.md) | Prompt Base para Multiagentes | `c71eaf6b9b18b305` |
 | [docs/multiagentes/templates/qa-performance.md](../../multiagentes/templates/qa-performance.md) | Prompt — QA/Performance | `1a71063d1187d31f` |
-| [docs/multiagentes/templates/ui-engineer.md](../../multiagentes/templates/ui-engineer.md) | Prompt — UI Engineer | `d0ccf2479a2e800b` |
+| [docs/multiagentes/templates/ui-engineer.md](../../multiagentes/templates/ui-engineer.md) | Prompt — UI Engineer | `0d6999e31c06a666` |
 | [package.json](../../../package.json) | package.json | `788083332e58abfc` |
 | [README.md](../../../README.md) | MaximWeb — Landing Page | `975bf23a4d5cbbe9` |

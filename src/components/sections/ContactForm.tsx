@@ -274,10 +274,16 @@ export default function ContactForm() {
 
   const inputRef    = useRef<HTMLInputElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const hasMountedRef = useRef(false)
 
   const current = STEPS[step]
 
   useEffect(() => {
+    if (!hasMountedRef.current) {
+      hasMountedRef.current = true
+      return
+    }
+
     const id = setTimeout(() => {
       if (current.inputType === 'textarea') textareaRef.current?.focus()
       else                                  inputRef.current?.focus()

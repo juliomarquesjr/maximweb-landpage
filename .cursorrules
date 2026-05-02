@@ -136,6 +136,30 @@ Sempre execute `npm run build` antes de finalizar qualquer tarefa. Deve terminar
 - Upload só inicia após todos os workers conectarem; em TTY há barra de progresso e logs coloridos
 - O script ignora `contact.config.local.php` por segurança
 
+## Quando consultar o vault
+
+Consulte os arquivos abaixo nos cenários indicados — não é necessário ler tudo sempre:
+
+| Quando... | Leia |
+|---|---|
+| Antes de modificar estrutura de componentes ou fronteira client/server | `docs/ARCHITECTURE.md` |
+| Antes de usar ou criar qualquer token, keyframe ou classe CSS | `docs/DESIGN_TOKENS.md` |
+| Para entender por que uma decisão foi tomada | `docs/knowledge/_generated/adr-index.md` |
+| Para ver mapa de arquivos e dependências | `docs/knowledge/_generated/project-map.md` |
+| Antes de criar documentação ou avaliar se algo vira ADR | `docs/knowledge/patterns/documentation-update-flow.md` |
+
+## ADR — quando propor
+
+Após qualquer tarefa estrutural, avalie se cabe um ADR. **Nunca crie sem perguntar ao usuário**, explicando o motivo.
+
+Propor quando: mudança de paradigma de interação · nova convenção de animação ou componente reutilizável · escolha de biblioteca com alternativas rejeitadas · decisão de fronteira server/client · arquitetura de deploy ou backend · decisão que um agente futuro poderia desfazer sem entender o contexto.
+
+Não propor para: bug fix, ajuste visual, adição de prop, mudança de copy.
+
+ADRs existentes: `adr/001–007`. Próximo: `adr/008`. Após criar, rodar `npm run knowledge:sync`.
+
+---
+
 ## Manutenção de documentação
 
 Se você adicionou ou alterou componentes, props, CSS utilities, keyframes ou convenções, atualize **todos** os arquivos abaixo antes de encerrar:
