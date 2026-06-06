@@ -305,7 +305,8 @@ export default function ContactForm() {
 
     setLoading(true)
     try {
-      const res = await fetch('/contact.php', {
+      const endpoint = process.env.NEXT_PUBLIC_CONTACT_URL ?? '/api/contact'
+      const res = await fetch(endpoint, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify(form),

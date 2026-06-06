@@ -4,6 +4,15 @@
       "command": "npx",
       "args": ["@playwright/mcp@latest"],
       "env": {}
+    },
+    "maxim-vps": {
+      "command": "npx",
+      "args": ["--yes", "@marcelocorrea/mcp-ubuntu-server", "--transport", "stdio"],
+      "env": {
+        "SSH_HOST": "2.25.181.56",
+        "SSH_USERNAME": "root",
+        "SSH_PASSWORD": "oN)TrHu'YKi3(dX/"
+      }
     }
   },
   "hooks": {

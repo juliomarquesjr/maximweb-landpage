@@ -4,7 +4,7 @@ import Hero          from '@/components/sections/Hero'
 import Services      from '@/components/sections/Services'
 import Products      from '@/components/sections/Products'
 import Differentials from '@/components/sections/Differentials'
-import CTA           from '@/components/sections/CTA'
+import CTA, { CTABeam } from '@/components/sections/CTA'
 import ContactForm   from '@/components/sections/ContactForm'
 import TechMarquee   from '@/components/ui/TechMarquee'
 
@@ -23,7 +23,7 @@ export default function HomePage() {
         <Differentials />
         <div className="section-divider" />
         <CTA />
-        <div className="section-divider" />
+        <CTABeam />
         <ContactForm />
       </main>
       <Footer />
